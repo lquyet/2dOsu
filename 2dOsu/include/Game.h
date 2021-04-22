@@ -10,7 +10,7 @@ using namespace std;
 
 
 const int WIDTH = 1280;
-const int HEIGHT = 960;
+const int HEIGHT = 720;
 const int ViewportWidth = 680;
 const int ViewportHeight = HEIGHT;
 const int ViewportX = WIDTH / 2 - ViewportWidth / 2;  //center the viewport

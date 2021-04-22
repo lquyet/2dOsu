@@ -1,7 +1,10 @@
 #include "../include/Game.h"
 #include "../include/Texture.h"
 #include "../include/Tile.h"
+
 extern Tile* tile;
+SDL_Texture* background = NULL;
+
 Game::Game() {
 
 }
@@ -43,8 +46,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		cout << "TTF ERROR" << endl;
 		isRunning = false;
 	}
-	setViewport(ViewportX, ViewportY, ViewportHeight, ViewportWidth); 
-	tile = new Tile();
+	//tile = new Tile();
+	background = Texture::loadTexture("assets/background.png");
+	setViewport(ViewportX, ViewportY, ViewportHeight, ViewportWidth);
+	SDL_RenderCopy(renderer, background, NULL, NULL);
+	SDL_RenderPresent(renderer);
 }
 
 void Game::update() {
@@ -77,10 +83,7 @@ void Game::clean() {
 void Game::render() {
 	//clear previous renderer if existed
 	SDL_RenderClear(renderer);
-	// add stuff to render here
-	//tx = Texture::loadTexture("1.png", renderer);
-	//SDL_RenderCopy(renderer, tx, NULL, &destR);
-	//SDL_RenderCopy(renderer, background, NULL, NULL);
+
 	SDL_RenderPresent(renderer);
 }
 
