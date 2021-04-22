@@ -1,12 +1,16 @@
 #pragma once
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #undef main  //sdl_main has already defined in sdl.h, that's why we need this line
 #include <iostream>
 using namespace std;
 const int WIDTH = 1280;
-const int HEIGHT = 720;
-
+const int HEIGHT = 960;
+const int ViewportWidth = 680;
+const int ViewportHeight = HEIGHT;
+const int ViewportX = WIDTH / 2 - ViewportWidth / 2;  //center the viewport
+const int ViewportY = 0;
 
 class Game {
 public:
@@ -18,10 +22,11 @@ public:
 	void render();
 	void clean();
 	bool running();
+	void setViewport(const int& Vx, const int& Vy, const int& Vh, const int& Vw);
 	static SDL_Renderer* renderer;
 private:
 	SDL_Texture* background;
 	bool isRunning;
-	SDL_Rect destR;
 	SDL_Window* window;
+	SDL_Rect viewport;
 };

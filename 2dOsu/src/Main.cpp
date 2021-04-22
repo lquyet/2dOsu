@@ -11,7 +11,7 @@ int main() {
 	Uint32 frameStart;
 	int frameTime;
 	game = new Game();
-	game->init("Osu", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, false);
+	game->init("Osu", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, false);
 
 	while (game->running()) {
 		frameStart = SDL_GetTicks();

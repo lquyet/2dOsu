@@ -86,3 +86,11 @@ void Game::render() {
 bool Game::running() {
 	return isRunning;
 }
+
+void Game::setViewport(const int& Vx, const int& Vy, const int& Vh, const int& Vw) {
+	viewport.x = Vx;
+	viewport.y = Vy;
+	viewport.h = Vh;
+	viewport.w = Vw;
+	SDL_RenderSetViewport(renderer, &viewport);
+}
