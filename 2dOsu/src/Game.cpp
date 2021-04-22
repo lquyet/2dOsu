@@ -43,7 +43,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		cout << "TTF ERROR" << endl;
 		isRunning = false;
 	}
-	return;
+	setViewport(ViewportX, ViewportY, ViewportHeight, ViewportWidth); 
 }
 
 void Game::update() {

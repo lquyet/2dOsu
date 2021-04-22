@@ -1,10 +1,13 @@
 #pragma once
+#include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #undef main  //sdl_main has already defined in sdl.h, that's why we need this line
-#include <iostream>
 using namespace std;
+
+
 const int WIDTH = 1280;
 const int HEIGHT = 960;
 const int ViewportWidth = 680;
