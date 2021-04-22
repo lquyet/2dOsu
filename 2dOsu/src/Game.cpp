@@ -1,6 +1,6 @@
 #include "../include/Game.h"
 #include "../include/Texture.h"
-
+#include "../include/Tile.h"
 
 Game::Game() {
 
