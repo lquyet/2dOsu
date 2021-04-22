@@ -4,6 +4,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
+#include "Tile.h"
 #undef main  //sdl_main has already defined in sdl.h, that's why we need this line
 using namespace std;
 

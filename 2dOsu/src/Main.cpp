@@ -2,12 +2,13 @@
 
 Game* game = NULL;
 SDL_Renderer* Game::renderer = NULL;
-
+Tile* tile = NULL;
 const int FPS = 60;
 const int frameDelay = 1000 / FPS;
 
 
 int main() {
+	srand(time(NULL)); //init random for setBackKey function in Tile class
 	Uint32 frameStart;
 	int frameTime;
 	game = new Game();

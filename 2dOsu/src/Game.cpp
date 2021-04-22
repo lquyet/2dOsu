@@ -1,7 +1,7 @@
 #include "../include/Game.h"
 #include "../include/Texture.h"
 #include "../include/Tile.h"
-
+extern Tile* tile;
 Game::Game() {
 
 }
@@ -44,6 +44,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		isRunning = false;
 	}
 	setViewport(ViewportX, ViewportY, ViewportHeight, ViewportWidth); 
+	tile = new Tile();
 }
 
 void Game::update() {

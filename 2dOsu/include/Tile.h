@@ -1,9 +1,11 @@
 #pragma once
 #include <SDL.h>
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 using namespace std;
 
-const int mapRange = 3;
+const int mapRange = 4;
 class Tile {
 public:
 	Tile();

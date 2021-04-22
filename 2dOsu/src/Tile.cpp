@@ -7,8 +7,7 @@ Tile::Tile() {
 			map[i][j] = 0;
 		}
 	}
-	for (int i = 0; i < mapRange; i++) setBlackKey();
-
+	for (int i = 0; i < mapRange - 1; i++) setBlackKey();
 }
 
 Tile::~Tile() {
