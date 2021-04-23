@@ -4,7 +4,6 @@
 
 extern Tile* tile;
 SDL_Texture* background = NULL;
-
 Game::Game() {
 
 }
@@ -46,15 +45,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		cout << "TTF ERROR" << endl;
 		isRunning = false;
 	}
-	//tile = new Tile();
-	background = Texture::loadTexture("assets/background.png");
-	setViewport(ViewportX, ViewportY, ViewportHeight, ViewportWidth);
-	SDL_RenderCopy(renderer, background, NULL, NULL);
-	SDL_RenderPresent(renderer);
+	//setViewport(ViewportX, ViewportY, ViewportHeight, ViewportWidth);
+	tile = new Tile();
+	background = Texture::loadTexture("assets/backgroundBlack.png");
 }
 
 void Game::update() {
-
+	tile->update();
 }
 
 void Game::handleEvents() {
@@ -83,7 +80,8 @@ void Game::clean() {
 void Game::render() {
 	//clear previous renderer if existed
 	SDL_RenderClear(renderer);
-
+	SDL_RenderCopy(renderer, background, NULL, NULL);
+	tile->render();
 	SDL_RenderPresent(renderer);
 }
 

@@ -3,9 +3,10 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
-using namespace std;
 
 const int mapRange = 4;
+const int EDGE = 160;
+
 class Tile {
 public:
 	Tile();
@@ -15,5 +16,7 @@ public:
 	void setBlackKey();
 private:
 	int map[mapRange][mapRange];
-	SDL_Rect tile;
+	SDL_Texture* whiteTile;
+	SDL_Texture* blackTile;
+	SDL_Rect src, dst;
 };
