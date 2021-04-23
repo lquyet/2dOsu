@@ -62,6 +62,12 @@ void Game::handleEvents() {
 	case SDL_QUIT:
 		isRunning = false;
 		break;
+	case SDL_MOUSEBUTTONDOWN:
+		SDL_GetMouseState(&mouseX, &mouseY);
+		if (!(tile->check(mouseX, mouseY))) {
+			isRunning = false;
+		}
+		break;
 	default:
 		break;
 	}

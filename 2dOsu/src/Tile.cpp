@@ -32,7 +32,7 @@ void Tile::render() {
 			type = map[i][j];
 
 			dst.x =  ViewportX + j * 160; //column
-			dst.y =  160 + ViewportY + i * 160 - 40; //row
+			dst.y =  HEIGHT - mapRange * EDGE + ViewportY + i * 160 - OFFSET_BOTTOM; //row
 
 			switch (type) {
 			case 0:
@@ -51,13 +51,40 @@ void Tile::render() {
 void Tile::update() {
 	//check mouse click
 
+
 }
 
-void Tile::setBlackKey() {
+void Tile::setBlackKey(bool isClick) {
 	int rRow, rCol;
-	do {
-		rRow = rand() % mapRange;
-		rCol = rand() % mapRange;
-	} while (map[rRow][rCol] == 1);
+	if (isClick == true) {
+		do {
+			rRow = rand() % mapRange;
+			rCol = rand() % mapRange;
+		} while (map[rRow][rCol] == 1 || (lastRow == rRow && lastColumn == rCol));
+	}
+	else {
+		do {
+			rRow = rand() % mapRange;
+			rCol = rand() % mapRange;
+		} while (map[rRow][rCol] == 1);
+	}
 	map[rRow][rCol] = 1;  // clickable, change color to black
+	cout << "(" << rRow << ":" << rCol << ")" << "       " << "(" << lastRow << ":" << lastColumn << ")" << endl;
+}
+
+bool Tile::check(const int& mouseX, const int& mouseY) {
+	// dich chuyen he toa do ve goc tren ben trai o thu nhat trong grid 4x4
+	int tempX = mouseX - ViewportX;
+	int tempY = mouseY - (HEIGHT - mapRange * EDGE + ViewportY - OFFSET_BOTTOM);
+	int row = floor(tempY / EDGE);
+	int column = floor(tempX / EDGE);
+	if (map[row][column] == 1) {
+		map[row][column] = 0;
+		lastRow = row;
+		lastColumn = column;
+		setBlackKey(true);
+		return true;
+	}
+	return false;
+
 }

@@ -3,7 +3,7 @@
 Game* game = NULL;
 SDL_Renderer* Game::renderer = NULL;
 Tile* tile = NULL;
-const int FPS = 60;
+const int FPS = 120;
 const int frameDelay = 1000 / FPS;
 
 int main() {
@@ -11,7 +11,7 @@ int main() {
 	Uint32 frameStart;
 	int frameTime;
 	game = new Game();
-	game->init("Osu", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, false);
+	game->init("Super Hard Osu", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, false);
 
 	while (game->running()) {
 		frameStart = SDL_GetTicks();
