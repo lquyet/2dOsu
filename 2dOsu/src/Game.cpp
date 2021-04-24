@@ -20,6 +20,7 @@ enum State {
 	Ingame = 1,
 	Option = 2,
 	Preloading = 3,
+	End = 4
 };
 
 
@@ -63,11 +64,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	//image = Texture::renderText("HELLO WORLD", font, color, 14);
 	//TTF_CloseFont(font);
 	//gameState = 0;
-	play = new Button("assets/PLAY.png", 0, 0);
+
 }
 
 void Game::update() {
 	SDL_GetMouseState(&mouseX, &mouseY); //update mouse position
+	cout << "X: " << mouseX << "  " << "Y: " << mouseY << endl;
 	/*
 	switch (gameState) {
 	case Intro:
@@ -79,12 +81,14 @@ void Game::update() {
 		break;
 	case Preloading:
 		break;
+	case End:
+		break;
 	default:
 		break;
 	}
 	*/
 	tile->update();
-	play->update();
+	
 }
 
 void Game::handleEvents() {
@@ -131,12 +135,14 @@ void Game::render() {
 		break;
 	case Preloading:
 		break;
+	case End:
+		break;
 	default:
 		break;
 	}
 	*/
 	tile->render();
-	play->render();
+	
 	SDL_RenderPresent(renderer);
 }
 

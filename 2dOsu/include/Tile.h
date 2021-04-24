@@ -3,7 +3,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
-
+#include "Button.h"
 const int mapRange = 4;
 const int EDGE = 160;
 const int OFFSET_BOTTOM = 40;
@@ -22,4 +22,8 @@ private:
 	SDL_Texture* blackTile;
 	SDL_Rect src, dst;
 	int lastRow, lastColumn;
+	int score;
+	SDL_Texture* scoreTexture;
+	//Button* pause;
 };
+

@@ -31,8 +31,7 @@ void Button::update() {
 	//check if cursor point to button
 	int x = game->getMouseX();
 	int y = game->getMouseY();
-
-	if ((dst.x <= x && x <= dst.x + bWidth) && (dst.y <= y && y <= dst.y + bHeight)) {
+	if ((dst.x <= x && x <= dst.x + dst.w) && (dst.y <= y && y <= dst.y + dst.h)) {
 		bFocus = true;
 	}
 	else {
@@ -40,7 +39,7 @@ void Button::update() {
 	}
 
 	if (bFocus == true) {
-		SDL_SetTextureColorMod(button, 200, 0, 0);
+		SDL_SetTextureColorMod(button, focusColor.r, focusColor.g, focusColor.b);
 	}
 	else {
 		SDL_SetTextureColorMod(button, 0, 0, 0);
