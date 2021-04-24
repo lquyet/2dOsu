@@ -1,6 +1,6 @@
 #include "../include/Game.h"
 #include "../include/StartScreen.h"
-
+#include <fstream>
 Game* game = NULL;
 SDL_Renderer* Game::renderer = NULL;
 int Game::gameState = 0;
@@ -11,6 +11,7 @@ const int frameDelay = 1000 / FPS;
 
 
 int main() {
+
 	srand(time(NULL)); //init random for setBackKey function in Tile class
 	Uint32 frameStart;
 	int frameTime;

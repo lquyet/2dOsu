@@ -24,6 +24,7 @@ private:
 	int lastRow, lastColumn;
 	int score;
 	SDL_Texture* scoreTexture;
+	int hScore;
 	//Button* pause;
 };
 

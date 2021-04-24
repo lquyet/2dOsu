@@ -1,0 +1,11 @@
+To-do lists
+
+1. count down timer
+2. pause + resume 
+3. menu intro game
+4. replay after death
+5. choose player/crosshair
+6. colorized background + tiles
+7. center point / text
+8. music ingame ---- onclick + background music
+9. preloading scene

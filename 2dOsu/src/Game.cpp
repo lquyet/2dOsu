@@ -69,7 +69,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 void Game::update() {
 	SDL_GetMouseState(&mouseX, &mouseY); //update mouse position
-	cout << "X: " << mouseX << "  " << "Y: " << mouseY << endl;
+	//cout << "X: " << mouseX << "  " << "Y: " << mouseY << endl;
 	/*
 	switch (gameState) {
 	case Intro:
