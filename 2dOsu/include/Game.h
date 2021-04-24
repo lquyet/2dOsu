@@ -5,6 +5,10 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include "Tile.h"
+#include "Game.h"
+#include "Texture.h"
+#include "StartScreen.h"
+#include "Button.h"
 #undef main  //sdl_main has already defined in sdl.h, that's why we need this line
 using namespace std;
 
@@ -20,6 +24,12 @@ class Game {
 public:
 	Game();
 	~Game();
+	int getMouseX() {
+		return mouseX;
+	}
+	int getMouseY() {
+		return mouseY;
+	}
 	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 	void handleEvents();
 	void update();
@@ -28,6 +38,7 @@ public:
 	bool running();
 	void setViewport(const int& Vx, const int& Vy, const int& Vh, const int& Vw);
 	static SDL_Renderer* renderer;
+	static int gameState;
 private:
 	SDL_Texture* background;
 	bool isRunning;

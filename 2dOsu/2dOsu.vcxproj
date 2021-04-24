@@ -142,13 +142,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\StartScreen.cpp" />
+    <ClCompile Include="src\Textbox.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\Math.h" />
+    <ClInclude Include="include\StartScreen.h" />
+    <ClInclude Include="include\Textbox.h" />
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\Tile.h" />
   </ItemGroup>

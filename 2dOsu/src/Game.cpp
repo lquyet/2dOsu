@@ -1,9 +1,12 @@
 #include "../include/Game.h"
-#include "../include/Texture.h"
-#include "../include/Tile.h"
 
 extern Tile* tile;
 SDL_Texture* background = NULL;
+SDL_Texture* image = NULL;
+StartScreen* intro = NULL;
+SDL_Color color = { 255,255,255,255 };
+SDL_Rect dst = { 0,0,90,14 };
+Button* play = NULL;
 Game::Game() {
 
 }
@@ -11,6 +14,13 @@ Game::Game() {
 Game::~Game() {
 
 }
+
+enum State {
+	Intro = 0,
+	Ingame = 1,
+	Option = 2,
+	Preloading = 3,
+};
 
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) {
@@ -46,12 +56,35 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		isRunning = false;
 	}
 	//setViewport(ViewportX, ViewportY, ViewportHeight, ViewportWidth);
+	//intro = new StartScreen();
 	tile = new Tile();
-	background = Texture::loadTexture("assets/backgroundBlack.png");
+	//background = Texture::loadTexture("assets/backgroundBlack.png");
+	//TTF_Font* font = TTF_OpenFont("font/Bariol.ttf", 14);
+	//image = Texture::renderText("HELLO WORLD", font, color, 14);
+	//TTF_CloseFont(font);
+	//gameState = 0;
+	play = new Button("assets/PLAY.png", 0, 0);
 }
 
 void Game::update() {
+	SDL_GetMouseState(&mouseX, &mouseY); //update mouse position
+	/*
+	switch (gameState) {
+	case Intro:
+		intro->update();
+		break;
+	case Ingame:
+		tile->update();
+	case Option:
+		break;
+	case Preloading:
+		break;
+	default:
+		break;
+	}
+	*/
 	tile->update();
+	play->update();
 }
 
 void Game::handleEvents() {
@@ -86,8 +119,24 @@ void Game::clean() {
 void Game::render() {
 	//clear previous renderer if existed
 	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, background, NULL, NULL);
+	//SDL_RenderCopy(renderer, background, NULL, NULL);
+	//SDL_RenderCopy(renderer, image, NULL, &dst);
+	/*
+	switch (gameState) {
+	case Intro:
+		intro->render();
+	case Ingame:
+		tile->render();
+	case Option:
+		break;
+	case Preloading:
+		break;
+	default:
+		break;
+	}
+	*/
 	tile->render();
+	play->render();
 	SDL_RenderPresent(renderer);
 }
 
@@ -102,3 +151,4 @@ void Game::setViewport(const int& Vx, const int& Vy, const int& Vh, const int& V
 	viewport.w = Vw;
 	SDL_RenderSetViewport(renderer, &viewport);
 }
+

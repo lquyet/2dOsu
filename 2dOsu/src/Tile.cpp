@@ -11,7 +11,7 @@ Tile::Tile() {
 	}
 	for (int i = 0; i < mapRange - 1; i++) setBlackKey();
 	whiteTile = Texture::loadTexture("assets/whiteTile.png");
-	blackTile = Texture::loadTexture("assets/blackTile.png");
+	blackTile = Texture::loadTexture("assets/tile.png");
 
 	src.x = src.y = 0;
 	src.w = dst.w = EDGE;
@@ -36,6 +36,7 @@ void Tile::render() {
 
 			switch (type) {
 			case 0:
+				SDL_SetTextureColorMod(whiteTile, 173, 197, 183);
 				Texture::Draw(whiteTile, src, dst);
 				break;
 			case 1:
@@ -73,9 +74,13 @@ void Tile::setBlackKey(bool isClick) {
 }
 
 bool Tile::check(const int& mouseX, const int& mouseY) {
-	// dich chuyen he toa do ve goc tren ben trai o thu nhat trong grid 4x4
+	// exchange the origin 
+
 	int tempX = mouseX - ViewportX;
 	int tempY = mouseY - (HEIGHT - mapRange * EDGE + ViewportY - OFFSET_BOTTOM);
+
+	if (tempX < 0 || tempY < 0 || tempX > ViewportWidth || tempY > mapRange * EDGE) return true;  //outside gamezone
+
 	int row = floor(tempY / EDGE);
 	int column = floor(tempX / EDGE);
 	if (map[row][column] == 1) {
