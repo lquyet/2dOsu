@@ -35,3 +35,8 @@ void Textbox::moveX(int distance) {
 void Textbox::moveY(int distance) {
 	dst.y += distance;
 }
+
+//vertically centerize
+void Textbox::center(const int& x) {  
+	dst.x = x - dst.w / 2;
+}

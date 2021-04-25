@@ -50,27 +50,20 @@ Tile::Tile() {
 	for (int i = 0; i < 10; i++) {
 		fontList[i] = TTF_OpenFont("font/Bariol.ttf", 30 + i * 5);
 	}
-	scoreBox = new Textbox("Score", font30, fontColor, 590, 10);
-	hiScore = new Textbox("Hi - Score", font30, fontColor, 310, 10); 
+	scoreBox = new Textbox("Score", font30, fontColor, 0, 10);
+	scoreBox->center(ViewportX + mapRange / 2 * EDGE);
 
-	switch (to_string(hScore).size()) {
-	case 1:
-		hiScorePoint = new Textbox(to_string(hScore), fontList[9], pointColor, 336, 50);
-		break;
-	case 2:
-		hiScorePoint = new Textbox(to_string(hScore), fontList[9], pointColor, 320, 50);
-		break;
-	case 3: 
-		hiScorePoint = new Textbox(to_string(hScore), fontList[9], pointColor, 310, 50);
-		break;
-	default:
-		break;
-	}
-	//hiScorePoint = new Textbox(hScore, fontList[9], pointColor, 336, 50);   //2cs 315, 1cs 336
-	timeText = new Textbox("Time", font30, fontColor, 880, 10);
-	//cout << scoreBox->dst.w << "   " << scoreBox->dst.h << endl;
+	hiScore = new Textbox("Hi - Score", font30, fontColor, 0, 10); 
+	hiScore->center(ViewportX + EDGE / 2);
 
-	point = new Textbox(to_string(score), fontList[9], pointColor, 600, 50);
+	hiScorePoint = new Textbox(to_string(hScore), fontList[9], pointColor, 0, 50);
+	hiScorePoint->center(ViewportX + EDGE / 2);
+
+	timeText = new Textbox("Time", font30, fontColor, 0, 10);
+	timeText->center(ViewportX + EDGE / 2 + (mapRange - 1) * EDGE);
+
+	point = new Textbox(to_string(score), fontList[9], pointColor, 0, 50);
+	point->center(ViewportX + mapRange / 2 * EDGE);
 }
 
 Tile::~Tile() {
@@ -114,6 +107,7 @@ void Tile::update() {
 	//check mouse click
 	pause->update();
 	//scoreBox->update("Score", font, fontColor);
+	point->center(ViewportX + mapRange / 2 * EDGE);
 	
 }
 
