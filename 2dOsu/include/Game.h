@@ -5,10 +5,10 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include "Tile.h"
-#include "Game.h"
 #include "Texture.h"
 #include "StartScreen.h"
 #include "Button.h"
+#include "Timer.h"
 #undef main  //sdl_main has already defined in sdl.h, that's why we need this line
 using namespace std;
 

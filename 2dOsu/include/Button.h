@@ -11,9 +11,10 @@ public:
 	void render();
 	SDL_Rect dst;
 	SDL_Color focusColor;
+	bool bFocus;
 private:
 	int bWidth;
 	int bHeight;
 	SDL_Texture* button;
-	bool bFocus;
+
 };

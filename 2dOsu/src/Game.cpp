@@ -1,12 +1,16 @@
 #include "../include/Game.h"
 
 extern Tile* tile;
+extern Timer* countdown;
 SDL_Texture* background = NULL;
 SDL_Texture* image = NULL;
 StartScreen* intro = NULL;
 SDL_Color color = { 255,255,255,255 };
 SDL_Rect dst = { 0,0,90,14 };
 Button* play = NULL;
+
+extern Button* pause;
+
 Game::Game() {
 
 }
@@ -101,8 +105,18 @@ void Game::handleEvents() {
 		break;
 	case SDL_MOUSEBUTTONDOWN:
 		SDL_GetMouseState(&mouseX, &mouseY);
-		if (!(tile->check(mouseX, mouseY))) {
+		if (countdown->isPaused == false && !(tile->check(mouseX, mouseY))) {
 			isRunning = false;
+		}
+		if (pause->bFocus == true) {
+			if (countdown->isPaused == false) {
+				countdown->pause();
+				//countdown->isPaused == true;
+			}
+			else {
+				//countdown->isPaused == false;
+				countdown->resume();
+			}
 		}
 		break;
 	default:

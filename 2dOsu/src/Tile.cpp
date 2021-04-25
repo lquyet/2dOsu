@@ -2,6 +2,7 @@
 #include "../include/Texture.h"
 #include "../include/Game.h"
 #include "../include/Textbox.h"
+#include "../include/Timer.h"
 #include <string>
 #include <fstream>
 
@@ -15,6 +16,8 @@ Textbox* hiScorePoint = NULL;
 Textbox* timeText = NULL;
 Textbox* point = NULL;
 SDL_Color pointColor = { 28,135,179 };
+Timer* countdown = NULL;
+Textbox* countdownText = NULL;
 
 TTF_Font* fontList[10]; //score effect  from size 30 -> 50, distance = 2
 
@@ -64,6 +67,10 @@ Tile::Tile() {
 
 	point = new Textbox(to_string(score), fontList[9], pointColor, 0, 50);
 	point->center(ViewportX + mapRange / 2 * EDGE);
+
+	countdown = new Timer(40);
+	countdownText = new Textbox(to_string(countdown->getTimeLeft()), fontList[9], pointColor, 0, 50);
+	countdownText->center(ViewportX + EDGE / 2 + (mapRange - 1) * EDGE);
 }
 
 Tile::~Tile() {
@@ -101,14 +108,19 @@ void Tile::render() {
 	timeText->render();
 	point->render();
 	hiScorePoint->render();
+	countdownText->render();
 }
 
 void Tile::update() {
 	//check mouse click
 	pause->update();
 	//scoreBox->update("Score", font, fontColor);
-	point->center(ViewportX + mapRange / 2 * EDGE);
-	
+	if (countdown->isPaused == false) {
+		point->center(ViewportX + mapRange / 2 * EDGE);
+		hiScorePoint->center(ViewportX + EDGE / 2);
+		countdownText->update(to_string(countdown->getTimeLeft()), fontList[9], pointColor);
+		countdownText->center(ViewportX + EDGE / 2 + (mapRange - 1) * EDGE);
+	}
 }
 
 void Tile::setBlackKey(bool isClick) {
@@ -131,35 +143,37 @@ void Tile::setBlackKey(bool isClick) {
 
 bool Tile::check(const int& mouseX, const int& mouseY) {
 	// exchange the origin 
+	if (!countdown->isPaused) {
+		int tempX = mouseX - ViewportX;
+		int tempY = mouseY - (HEIGHT - mapRange * EDGE + ViewportY - OFFSET_BOTTOM);
 
-	int tempX = mouseX - ViewportX;
-	int tempY = mouseY - (HEIGHT - mapRange * EDGE + ViewportY - OFFSET_BOTTOM);
+		if (tempX < 0 || tempY < 0 || tempX > ViewportWidth || tempY > mapRange * EDGE) return true;  //outside gamezone
 
-	if (tempX < 0 || tempY < 0 || tempX > ViewportWidth || tempY > mapRange * EDGE) return true;  //outside gamezone
-
-	int row = floor(tempY / EDGE);
-	int column = floor(tempX / EDGE);
-	if (map[row][column] == 1) {
-		map[row][column] = 0;
-		score++;
-		if (score == 10) point->moveX(-15);
-		else if (score == 100) point->moveX(-15);
-		point->update(to_string(score),fontList[9], pointColor);
-		lastRow = row;
-		lastColumn = column;
-		setBlackKey(true);
-		return true;
-	}
-	else {
-		if (score > hScore) {
-			hScore = score;
-			score = 0;
-			ofstream ofs("highScore.txt", std::ofstream::trunc);
-			ofs << hScore;
-			ofs.close();
+		int row = floor(tempY / EDGE);
+		int column = floor(tempX / EDGE);
+		if (map[row][column] == 1) {
+			map[row][column] = 0;
+			score++;
+			if (score == 10) point->moveX(-15);
+			else if (score == 100) point->moveX(-15);
+			point->update(to_string(score), fontList[9], pointColor);
+			lastRow = row;
+			lastColumn = column;
+			setBlackKey(true);
+			return true;
 		}
+		else {
+			if (score > hScore) {
+				hScore = score;
+				score = 0;
+				ofstream ofs("highScore.txt", std::ofstream::trunc);
+				ofs << hScore;
+				ofs.close();
+			}
+		}
+		return false;
 	}
-	return false;
-
+	return true;
 }
+	
 

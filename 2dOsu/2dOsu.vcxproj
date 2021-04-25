@@ -149,6 +149,7 @@
     <ClCompile Include="src\Textbox.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Tile.cpp" />
+    <ClCompile Include="src\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Button.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="include\Textbox.h" />
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\Tile.h" />
+    <ClInclude Include="include\Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
