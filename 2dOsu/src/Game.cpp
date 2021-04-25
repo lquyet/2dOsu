@@ -2,14 +2,17 @@
 
 extern Tile* tile;
 extern Timer* countdown;
+Music* music = NULL;
 SDL_Texture* background = NULL;
 SDL_Texture* image = NULL;
 StartScreen* intro = NULL;
-SDL_Color color = { 255,255,255,255 };
+//SDL_Color color = { 255,255,255,255 };
 SDL_Rect dst = { 0,0,90,14 };
 Button* play = NULL;
-
+Mix_Music* backgroundMusic = NULL;
 extern Button* pause;
+
+
 
 Game::Game() {
 
@@ -69,6 +72,26 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	//TTF_CloseFont(font);
 	//gameState = 0;
 
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+		cout << Mix_GetError() << endl;
+	}
+	if (Mix_Init(MIX_INIT_MP3) < 0) {  //damn i fucked up with this for a long time. forgot .dll files @@
+		cout << Mix_GetError() << endl;
+	}
+
+	else {
+		music = new Music();
+		music->background = Mix_LoadMUS("assets/audio/backgroundMusic.mp3");
+		if (music->background == NULL) cout << Mix_GetError() << endl;
+		else Mix_PlayMusic(music->background, -1);
+
+		//load chunks
+		string chunks[16] = { "a6", "a7", "a8", "c6", "c7", "c8", "c9", "d6", "d7", "d8", "f6", "f7", "f8", "g6", "g7", "g8" };
+		for (int i = 0; i < 16; i++) {
+			string path = "assets/audio/" + chunks[i] + ".wav";
+			music->chunkList[i] = Mix_LoadWAV(path.c_str());
+		}
+	}
 }
 
 void Game::update() {

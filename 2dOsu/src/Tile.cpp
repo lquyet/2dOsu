@@ -6,7 +6,7 @@
 #include <string>
 #include <fstream>
 
-
+extern Music* music;
 Button* pause = NULL;
 TTF_Font* font30 = NULL;
 SDL_Color fontColor = { 0,0,0 };
@@ -152,6 +152,8 @@ bool Tile::check(const int& mouseX, const int& mouseY) {
 		int row = floor(tempY / EDGE);
 		int column = floor(tempX / EDGE);
 		if (map[row][column] == 1) {
+			int note = rand() % 16;
+			Mix_PlayChannel(-1, music->chunkList[note], 0);
 			map[row][column] = 0;
 			score++;
 			if (score == 10) point->moveX(-15);

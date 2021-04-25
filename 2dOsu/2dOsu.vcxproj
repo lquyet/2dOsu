@@ -145,6 +145,7 @@
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Music.cpp" />
     <ClCompile Include="src\StartScreen.cpp" />
     <ClCompile Include="src\Textbox.cpp" />
     <ClCompile Include="src\Texture.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Math.h" />
+    <ClInclude Include="include\Music.h" />
     <ClInclude Include="include\StartScreen.h" />
     <ClInclude Include="include\Textbox.h" />
     <ClInclude Include="include\Texture.h" />

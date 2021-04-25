@@ -9,6 +9,7 @@
 #include "StartScreen.h"
 #include "Button.h"
 #include "Timer.h"
+#include "Music.h"
 #undef main  //sdl_main has already defined in sdl.h, that's why we need this line
 using namespace std;
 
@@ -37,6 +38,7 @@ public:
 	void clean();
 	bool running();
 	void setViewport(const int& Vx, const int& Vy, const int& Vh, const int& Vw);
+	void loadMusic();
 	static SDL_Renderer* renderer;
 	static int gameState;
 private:

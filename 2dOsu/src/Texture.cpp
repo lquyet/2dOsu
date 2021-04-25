@@ -25,12 +25,12 @@ SDL_Texture* Texture::renderText(const std::string& message, TTF_Font* font,
 	SDL_Surface* sf = TTF_RenderText_Blended(font, message.c_str(), color);
 	if (sf == NULL) {
 		TTF_CloseFont(font);
-		cout << "CREATING SURFACE ERROR - TTF FONT" << endl;
+		cout << "CREATING SURFACE ERROR - TTF FONT   " << TTF_GetError() <<  endl;
 		return NULL;
 	}
 	SDL_Texture* tx = SDL_CreateTextureFromSurface(Game::renderer, sf);
 	if (tx == NULL) {
-		cout << "CREATING TEXTURE ERROR - TTF FONT" << endl;
+		cout << "CREATING TEXTURE ERROR - TTF FONT    " << TTF_GetError() << endl;
 	}
 	//int w, h;
 	//SDL_QueryTexture(tx, NULL, NULL, &w, &h);
