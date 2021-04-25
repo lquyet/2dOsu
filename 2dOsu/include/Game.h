@@ -40,7 +40,7 @@ public:
 	void setViewport(const int& Vx, const int& Vy, const int& Vh, const int& Vw);
 	void loadMusic();
 	static SDL_Renderer* renderer;
-	static int gameState;
+	int gameState;
 private:
 	SDL_Texture* background;
 	bool isRunning;
@@ -48,3 +48,7 @@ private:
 	SDL_Rect viewport;
 	int mouseX, mouseY;
 };
+
+void start();
+void option();
+void exit();

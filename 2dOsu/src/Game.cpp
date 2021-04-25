@@ -63,14 +63,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		cout << "TTF ERROR" << endl;
 		isRunning = false;
 	}
-	//setViewport(ViewportX, ViewportY, ViewportHeight, ViewportWidth);
-	//intro = new StartScreen();
-	tile = new Tile();
-	//background = Texture::loadTexture("assets/backgroundBlack.png");
-	//TTF_Font* font = TTF_OpenFont("font/Bariol.ttf", 14);
-	//image = Texture::renderText("HELLO WORLD", font, color, 14);
-	//TTF_CloseFont(font);
-	//gameState = 0;
+
+	gameState = Intro;
+	intro = new StartScreen();
+	//tile = new Tile();
 
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
 		cout << Mix_GetError() << endl;
@@ -97,13 +93,14 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 void Game::update() {
 	SDL_GetMouseState(&mouseX, &mouseY); //update mouse position
 	//cout << "X: " << mouseX << "  " << "Y: " << mouseY << endl;
-	/*
+
 	switch (gameState) {
 	case Intro:
 		intro->update();
 		break;
 	case Ingame:
 		tile->update();
+		break;
 	case Option:
 		break;
 	case Preloading:
@@ -113,8 +110,8 @@ void Game::update() {
 	default:
 		break;
 	}
-	*/
-	tile->update();
+
+	//tile->update();
 	
 }
 
@@ -128,17 +125,30 @@ void Game::handleEvents() {
 		break;
 	case SDL_MOUSEBUTTONDOWN:
 		SDL_GetMouseState(&mouseX, &mouseY);
-		if (countdown->isPaused == false && !(tile->check(mouseX, mouseY))) {
-			isRunning = false;
-		}
-		if (pause->bFocus == true) {
-			if (countdown->isPaused == false) {
-				countdown->pause();
-				//countdown->isPaused == true;
+		if (gameState == Intro) {
+			if (intro->button[START]->bFocus == true) {
+				gameState = Ingame;
+				//countdown->reset();
+				tile = new Tile();
+				return;  // so !(tile->check(mouseX, mouseY)) wont run;
 			}
-			else {
-				//countdown->isPaused == false;
-				countdown->resume();
+			else if (intro->button[EXIT]->bFocus == true) {
+				isRunning = false;
+			}
+		}
+		if (gameState == Ingame) {
+			if (countdown->isPaused == false && !(tile->check(mouseX, mouseY))) {
+				isRunning = false;
+			}
+			if (pause->bFocus == true) {
+				if (countdown->isPaused == false) {
+					countdown->pause();
+					//countdown->isPaused == true;
+				}
+				else {
+					//countdown->isPaused == false;
+					countdown->resume();
+				}
 			}
 		}
 		break;
@@ -162,12 +172,13 @@ void Game::render() {
 	SDL_RenderClear(renderer);
 	//SDL_RenderCopy(renderer, background, NULL, NULL);
 	//SDL_RenderCopy(renderer, image, NULL, &dst);
-	/*
 	switch (gameState) {
 	case Intro:
 		intro->render();
+		break;
 	case Ingame:
 		tile->render();
+		break;
 	case Option:
 		break;
 	case Preloading:
@@ -177,8 +188,7 @@ void Game::render() {
 	default:
 		break;
 	}
-	*/
-	tile->render();
+	//tile->render();
 	
 	SDL_RenderPresent(renderer);
 }

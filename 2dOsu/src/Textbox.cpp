@@ -21,6 +21,7 @@ void Textbox::update(std::string msg, TTF_Font* font, SDL_Color color) {
 	SDL_QueryTexture(text, NULL, NULL, &dst.w, &dst.h);
 }
 
+//hasnt worked yet
 void Textbox::scoreEffect(TTF_Font* fontList[10], std::string msg, SDL_Color color) {
 	for (int j = 9; j >= 0; j--) {
 		text = Texture::renderText(msg, fontList[j], color);

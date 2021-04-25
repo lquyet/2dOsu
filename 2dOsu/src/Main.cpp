@@ -1,9 +1,9 @@
 #include "../include/Game.h"
 #include "../include/StartScreen.h"
 #include <fstream>
+
 Game* game = NULL;
 SDL_Renderer* Game::renderer = NULL;
-int Game::gameState = 0;
 Tile* tile = NULL;
 
 const int FPS = 200;

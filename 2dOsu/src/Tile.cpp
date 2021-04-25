@@ -68,7 +68,7 @@ Tile::Tile() {
 	point = new Textbox(to_string(score), fontList[9], pointColor, 0, 50);
 	point->center(ViewportX + mapRange / 2 * EDGE);
 
-	countdown = new Timer(40);
+	countdown = new Timer(20);
 	countdownText = new Textbox(to_string(countdown->getTimeLeft()), fontList[9], pointColor, 0, 50);
 	countdownText->center(ViewportX + EDGE / 2 + (mapRange - 1) * EDGE);
 }
@@ -109,6 +109,7 @@ void Tile::render() {
 	point->render();
 	hiScorePoint->render();
 	countdownText->render();
+	cout << 2 << endl;
 }
 
 void Tile::update() {
@@ -121,6 +122,7 @@ void Tile::update() {
 		countdownText->update(to_string(countdown->getTimeLeft()), fontList[9], pointColor);
 		countdownText->center(ViewportX + EDGE / 2 + (mapRange - 1) * EDGE);
 	}
+	cout << 1 << endl;
 }
 
 void Tile::setBlackKey(bool isClick) {
@@ -156,8 +158,6 @@ bool Tile::check(const int& mouseX, const int& mouseY) {
 			Mix_PlayChannel(-1, music->chunkList[note], 0);
 			map[row][column] = 0;
 			score++;
-			if (score == 10) point->moveX(-15);
-			else if (score == 100) point->moveX(-15);
 			point->update(to_string(score), fontList[9], pointColor);
 			lastRow = row;
 			lastColumn = column;

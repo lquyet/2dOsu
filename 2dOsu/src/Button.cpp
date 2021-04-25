@@ -9,6 +9,8 @@ Button::Button(std::string pathToImage,const int &x,const int &y) {
 	dst.h = bHeight;
 	dst.x = x;
 	dst.y = y;
+	tempButton = button;
+	focusButton = NULL;
 }
 
 Button::Button() {
@@ -24,7 +26,7 @@ void Button::focus(bool focus) {
 }
 
 void Button::render() {
-	SDL_RenderCopy(Game::renderer, button, NULL, &dst);
+	SDL_RenderCopy(Game::renderer, tempButton, NULL, &dst);
 }
 
 void Button::update() {
@@ -39,9 +41,23 @@ void Button::update() {
 	}
 
 	if (bFocus == true) {
-		SDL_SetTextureColorMod(button, focusColor.r, focusColor.g, focusColor.b);
+		if (focusButton == NULL) SDL_SetTextureColorMod(button, focusColor.r, focusColor.g, focusColor.b);
+		else {
+			tempButton = focusButton;
+		}
 	}
 	else {
-		SDL_SetTextureColorMod(button, 0, 0, 0);
+		if (focusButton == NULL) SDL_SetTextureColorMod(button, 0, 0, 0);
+		else {
+			tempButton = button;
+		}
 	}
 }
+
+void Button::center(const int& x) {
+	dst.x = x - dst.w / 2;
+}
+
+//void Button::onClick(void func()) {
+//	func();
+//}
