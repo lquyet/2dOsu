@@ -22,6 +22,7 @@ SDL_Color fadeColor = { 50, 168, 82 };
 SDL_Color tempFade = { 50, 168, 82 };
 Timer* countdown = NULL;
 Textbox* countdownText = NULL;
+uint32_t alpha = 255;
 
 TTF_Font* fontList[10]; //score effect  from size 30 -> 50, distance = 2
 
@@ -97,15 +98,18 @@ void Tile::render() {
 
 			switch (type) {
 			case 0:
+				SDL_SetTextureAlphaMod(whiteTile, 255);
 				SDL_SetTextureColorMod(whiteTile, 255, 255, 255);
 				Texture::Draw(whiteTile, src, dst);
 				break;
 			case 1:
+				SDL_SetTextureAlphaMod(whiteTile, 255);
 				SDL_SetTextureColorMod(whiteTile, 100, 100, 100);
 				Texture::Draw(whiteTile, src, dst);
 				//Texture::Draw(blackTile, src, dst);
 				break;
 			case 2:  //fucked up with fading effect
+				/*
 				tempFade.r+=3;
 				tempFade.g+=3;
 				tempFade.b+=3;
@@ -120,6 +124,17 @@ void Tile::render() {
 					map[i][j] = 0;
 					tempFade = fadeColor;
 				}
+				*/
+				SDL_SetTextureColorMod(whiteTile, fadeColor.r, fadeColor.g, fadeColor.b);
+				SDL_SetTextureAlphaMod(whiteTile, alpha);
+				Texture::Draw(whiteTile, src, dst);
+				alpha -= 10;
+				if (alpha <= 11) {
+					map[i][j] = 0;
+					alpha = 255;
+				}
+				cout << alpha << endl;
+				//SDL_SetTextureAlphaMod(whiteTile, 255);
 				break;
 			default:
 				break;
