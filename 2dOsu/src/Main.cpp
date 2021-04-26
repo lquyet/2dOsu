@@ -8,8 +8,6 @@ Tile* tile = NULL;
 
 const int FPS = 200;
 const int frameDelay = 1000 / FPS;
-const int WIDTH = 1280;
-const int HEIGHT = 800;
 
 
 int main() {

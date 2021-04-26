@@ -8,7 +8,7 @@
 #include <SDL_thread.h>
 
 extern Music* music;
-extern Game* game;
+
 Button* pause = NULL;
 TTF_Font* font30 = NULL;
 SDL_Color fontColor = { 0,0,0 };
@@ -148,11 +148,7 @@ void Tile::update() {
 		countdownText->update(to_string(countdown->getTimeLeft()), fontList[9], pointColor);
 		countdownText->center(ViewportX + EDGE / 2 + (mapRange - 1) * EDGE);
 	}
-	if (countdown->getTimeLeft() <= 0) {
-		countdown->reset();
-		countdown->pause();
-		game->setRunningState(false);
-	}
+
 }
 
 void Tile::setBlackKey(bool isClick) {

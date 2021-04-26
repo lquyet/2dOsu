@@ -1,6 +1,5 @@
 #pragma once
 #include "Button.h"
-#include <string>
 
 class Textbox {
 public:
@@ -10,7 +9,7 @@ public:
 	void update(std::string msg, TTF_Font* font, SDL_Color color);
 	void scoreEffect(TTF_Font* fontList[10], std::string msg, SDL_Color color);
 	void center(const int& x);
-	std::string message;
+	string message;
 	SDL_Color color;
 	void moveX(int distance);
 	void moveY(int distance);
