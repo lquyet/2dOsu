@@ -2,6 +2,7 @@
 
 extern Tile* tile;
 extern Timer* countdown;
+SDL_Color c = { 28,135,179 };    // == point color
 Music* music = NULL;
 SDL_Texture* background = NULL;
 SDL_Texture* image = NULL;
@@ -100,6 +101,7 @@ void Game::update() {
 		break;
 	case Ingame:
 		tile->update();
+		if (countdown->getTimeLeft() == 0) isRunning = false;
 		break;
 	case Option:
 		break;
@@ -130,6 +132,8 @@ void Game::handleEvents() {
 				gameState = Ingame;
 				//countdown->reset();
 				tile = new Tile();
+				tile->preLoad(c);
+				countdown->reset();
 				return;  // so !(tile->check(mouseX, mouseY)) wont run;
 			}
 			else if (intro->button[EXIT]->bFocus == true) {

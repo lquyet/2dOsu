@@ -6,9 +6,9 @@
 #include <string>
 #include <fstream>
 #include <SDL_thread.h>
-
+class Textbox;
 extern Music* music;
-
+extern Game* game;
 Button* pause = NULL;
 TTF_Font* font30 = NULL;
 SDL_Color fontColor = { 0,0,0 };
@@ -79,7 +79,8 @@ Tile::Tile() {
 	countdownText = new Textbox(to_string(countdown->getTimeLeft()), fontList[9], pointColor, 0, 50);
 	countdownText->center(ViewportX + EDGE / 2 + (mapRange - 1) * EDGE);
 
-	//init thread
+	preLoadText = NULL;
+	preLoadBackground = NULL;
 }
 
 Tile::~Tile() {
@@ -220,6 +221,28 @@ bool Tile::check(const int& mouseX, const int& mouseY) {
 }
 	
 
-void fadeOut(int row, int column) {
+void Tile::preLoad(SDL_Color color) {
+	//this function with run synchronously, so i have to create a (new) temporary event handler in this 3-second period
+	SDL_Event e;
+	while (SDL_PollEvent(&e)) {
+		if (e.type == SDL_QUIT) game->setRunningState(false);
+	}
+	TTF_Font* font = TTF_OpenFont("font/Bariol.ttf", 50);
+	preLoadBackground = Texture::loadTexture("assets/backgroundBlack.png");
+	SDL_SetTextureAlphaMod(preLoadBackground, 100);
 
+	int timer = 3; //seconds
+	uint32_t start = SDL_GetTicks();
+	preLoadText = new Textbox(to_string(timer), font, color, 0, HEIGHT / 2);
+	preLoadText->center(WIDTH / 2);
+	uint32_t tick = SDL_GetTicks() - start;
+	while (tick <= timer*1000) {
+		SDL_RenderClear(Game::renderer);
+		SDL_RenderCopy(Game::renderer, preLoadBackground, NULL, NULL);
+		preLoadText->update(to_string(timer - tick / 1000), font, color);
+		preLoadText->render();
+		SDL_RenderPresent(Game::renderer);
+		tick = SDL_GetTicks() - start;
+	}
+	TTF_CloseFont(font);
 }

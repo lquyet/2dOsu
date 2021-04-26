@@ -4,11 +4,12 @@
 #include <ctime>
 #include <cstdlib>
 #include "Button.h"
+#include "Textbox.h"
 const int mapRange = 4;
 const int EDGE = 160;
 const int OFFSET_BOTTOM = 40;
 
-int fade(void* data);
+class Textbox;
 
 class Tile {
 public:
@@ -20,6 +21,7 @@ public:
 	bool check(const int& mouseX, const int& mouseY);
 	int getLastRow() { return lastRow; }
 	int getLastCol() { return lastColumn; }
+	void preLoad(SDL_Color color);
 
 private:
 	int map[mapRange][mapRange];
@@ -30,6 +32,8 @@ private:
 	int score;
 	SDL_Texture* scoreTexture;
 	int hScore;
+	Textbox* preLoadText;
+	SDL_Texture* preLoadBackground;
 	//Button* pause;
 };
 

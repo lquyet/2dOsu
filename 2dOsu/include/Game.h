@@ -41,6 +41,9 @@ public:
 	void loadMusic();
 	static SDL_Renderer* renderer;
 	int gameState;
+	void setRunningState(bool run) {
+		isRunning = run;
+	}
 private:
 	SDL_Texture* background;
 	bool isRunning;
