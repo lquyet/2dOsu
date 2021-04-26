@@ -10,12 +10,14 @@
 #include "Button.h"
 #include "Timer.h"
 #include "Music.h"
+#include "Textbox.h"
+#include "Preloading.h"
 #undef main  //sdl_main has already defined in sdl.h, that's why we need this line
 using namespace std;
 
 
-const int WIDTH = 1280;
-const int HEIGHT = 800;
+extern const int WIDTH;
+extern const int HEIGHT;
 const int ViewportWidth = 680;
 const int ViewportHeight = HEIGHT;
 const int ViewportX = WIDTH / 2 - ViewportWidth / 2;  //center the viewport
@@ -38,7 +40,9 @@ public:
 	void clean();
 	bool running();
 	void setViewport(const int& Vx, const int& Vy, const int& Vh, const int& Vw);
-	void loadMusic();
+	void setRunningState(bool state) {
+		isRunning = state;
+	}
 	static SDL_Renderer* renderer;
 	int gameState;
 private:
@@ -49,6 +53,3 @@ private:
 	int mouseX, mouseY;
 };
 
-void start();
-void option();
-void exit();

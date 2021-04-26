@@ -11,7 +11,7 @@ SDL_Rect dst = { 0,0,90,14 };
 Button* play = NULL;
 Mix_Music* backgroundMusic = NULL;
 extern Button* pause;
-
+Preloading* preloading = NULL;
 
 
 Game::Game() {
@@ -26,7 +26,7 @@ enum State {
 	Intro = 0,
 	Ingame = 1,
 	Option = 2,
-	Preloading = 3,
+	Preload = 3,
 	End = 4
 };
 
@@ -88,6 +88,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 			music->chunkList[i] = Mix_LoadWAV(path.c_str());
 		}
 	}
+
+	//preloading = new Preloading();
 }
 
 void Game::update() {
@@ -103,7 +105,9 @@ void Game::update() {
 		break;
 	case Option:
 		break;
-	case Preloading:
+	case Preload:
+		if (preloading == NULL) preloading = new Preloading();
+		preloading->update();
 		break;
 	case End:
 		break;
@@ -127,9 +131,9 @@ void Game::handleEvents() {
 		SDL_GetMouseState(&mouseX, &mouseY);
 		if (gameState == Intro) {
 			if (intro->button[START]->bFocus == true) {
-				gameState = Ingame;
+				gameState = Preload;
 				//countdown->reset();
-				tile = new Tile();
+				//tile = new Tile();
 				return;  // so !(tile->check(mouseX, mouseY)) wont run;
 			}
 			else if (intro->button[EXIT]->bFocus == true) {
@@ -137,6 +141,7 @@ void Game::handleEvents() {
 			}
 		}
 		if (gameState == Ingame) {
+			if (tile == NULL) tile = new Tile();
 			if (countdown->isPaused == false && !(tile->check(mouseX, mouseY))) {
 				isRunning = false;
 			}
@@ -181,10 +186,10 @@ void Game::render() {
 		break;
 	case Option:
 		break;
-	case Preloading:
-		break;
 	case End:
 		break;
+	case Preload:
+		preloading->render();
 	default:
 		break;
 	}
