@@ -173,15 +173,17 @@ Project Link: [https://github.com/Jo3yVX/2dOsu](https://github.com/Jo3yVX/2dOsu)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/Jo3yVX/2dOsu.svg?style=for-the-badge
+[contributors-url]: https://github.com/Jo3yVX/2dOsu/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Jo3yVX/2dOsu.svg?style=for-the-badge
+[forks-url]: https://github.com/Jo3yVX/2dOsu/network/members
+[stars-shield]: https://img.shields.io/github/stars/Jo3yVX/2dOsu.svg?style=for-the-badge
+[stars-url]: https://github.com/Jo3yVX/2dOsu/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Jo3yVX/2dOsu.svg?style=for-the-badge
+[issues-url]: https://github.com/Jo3yVX/2dOsu/issues
+[license-shield]: https://img.shields.io/github/license/Jo3yVX/2dOsu.svg?style=for-the-badge
+[license-url]: https://github.com/Jo3yVX/2dOsu/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/github_username
+
+
