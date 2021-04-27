@@ -156,7 +156,7 @@ Project Link: [https://github.com/Jo3yVX/2dOsu](https://github.com/Jo3yVX/2dOsu)
 [issues-shield]: https://img.shields.io/github/issues/Jo3yVX/2dOsu.svg?style=for-the-badge
 [issues-url]: https://github.com/Jo3yVX/2dOsu/issues
 [license-shield]: https://img.shields.io/github/license/Jo3yVX/2dOsu.svg?style=for-the-badge
-[license-url]: https://github.com/Jo3yVX/2dOsu/blob/master/LICENSE.txt
+[license-url]: https://github.com/Jo3yVX/2dOsu/LICENSE.txt
 [intro]: images/screen_shot.png
 [ingame]: images/screen_shot_2.png
 [end]: images/screen_shot_3.png
