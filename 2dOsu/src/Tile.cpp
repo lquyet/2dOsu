@@ -24,6 +24,7 @@ Timer* countdown = NULL;
 Textbox* countdownText = NULL;
 uint32_t alpha[mapRange][mapRange];
 extern EndScreen* endScreen;
+SDL_Color wrong = { 200, 0, 0 };
 
 TTF_Font* fontList[10]; //score effect  from size 30 -> 50, distance = 2
 
@@ -78,7 +79,7 @@ Tile::Tile() {
 	point = new Textbox(to_string(score), fontList[9], pointColor, 0, 50);
 	point->center(ViewportX + mapRange / 2 * EDGE);
 
-	countdown = new Timer(20);
+	countdown = new Timer(5);
 	countdownText = new Textbox(to_string(countdown->getTimeLeft()), fontList[9], pointColor, 0, 50);
 	countdownText->center(ViewportX + EDGE / 2 + (mapRange - 1) * EDGE);
 

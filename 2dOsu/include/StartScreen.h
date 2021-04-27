@@ -30,7 +30,7 @@ enum EndScreenButtonDetail {
 
 class EndScreen {
 public:
-	EndScreen(int score);
+	EndScreen(int score, std::string msg);
 	~EndScreen();
 	void update();
 	void render();

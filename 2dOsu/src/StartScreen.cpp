@@ -3,7 +3,6 @@
 extern Game* game;
 
 
-
 StartScreen::StartScreen() {
 	startScreenBackground = Texture::loadTexture("assets/IntroImage.png");
 
@@ -44,7 +43,7 @@ void StartScreen::render() {
 
 //End Screen 
 
-EndScreen::EndScreen(int score) {
+EndScreen::EndScreen(int score, std::string msg) {
 	TTF_Font* font80 = TTF_OpenFont("font/Bariol.ttf", 80);
 	TTF_Font* font120 = TTF_OpenFont("font/Bariol.ttf", 100);
 	SDL_Color color1 = { 255, 155, 23 };
@@ -60,7 +59,7 @@ EndScreen::EndScreen(int score) {
 	button[QUIT] = new Button("assets/button_quit.png", 0, 600);
 	button[QUIT]->focusButton = Texture::loadTexture("assets/button_quit_focus.png");
 	button[QUIT]->center(WIDTH / 2);
-	failMsg = new Textbox("YOU TAPPED A WHITE TILE!!!",font120, color2, 0, 200);
+	failMsg = new Textbox(msg,font120, color2, 0, 200);
 	TTF_CloseFont(font120);
 	failMsg->center(WIDTH / 2);
 }

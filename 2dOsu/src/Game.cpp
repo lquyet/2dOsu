@@ -89,18 +89,21 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 void Game::update() {
 	SDL_GetMouseState(&mouseX, &mouseY); //update mouse position
 	//cout << "X: " << mouseX << "  " << "Y: " << mouseY << endl;
-
+	//cout << countdown->getTimeLeft() << endl;
 	switch (gameState) {
 	case Intro:
 		intro->update();
 		break;
 	case Ingame:
 		tile->update();
-		if (countdown->getTimeLeft() == 0) isRunning = false;
+		if (countdown->getTimeLeft() == 0) {
+			gameState = End;
+		}
 		break;
 	case Option:
 		break;
 	case End:
+		//cout << countdown->getTimeLeft() << endl;
 		endScreen->update();
 		break;
 	default:
@@ -138,7 +141,8 @@ void Game::handleEvents() {
 			if (countdown->isPaused == false && !(tile->check(mouseX, mouseY))) {
 				//isRunning = false;
 				gameState = End;
-				endScreen = new EndScreen(tile->score);
+				//endState = true;
+				endScreen = new EndScreen(tile->score, "YOU TAPPED A WHITE TILE!!!");
 				return;
 			}
 			if (pause->bFocus == true) {
@@ -153,11 +157,15 @@ void Game::handleEvents() {
 			}
 		}
 		if (gameState == End) {
+			//if (endScreen == NULL) endScreen = new EndScreen(tile->score);
 			if (endScreen->button[QUIT]->bFocus == true) isRunning = false;
 			else if (endScreen->button[RESTART]->bFocus == true) {
 				tile->~Tile();
+				tile = NULL;
 				tile = new Tile();
 				tile->preLoad(c);
+				endScreen->~EndScreen();
+				endScreen = NULL;
 				countdown->reset();
 				gameState = Ingame;
 				return;
@@ -200,6 +208,7 @@ void Game::render() {
 	case Option:
 		break;
 	case End:
+		if (endScreen == NULL) endScreen = new EndScreen(tile->score, "OUT OF TIME!!!");
 		endScreen->render();
 		break;
 	default:
