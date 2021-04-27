@@ -22,8 +22,7 @@ Game::~Game() {
 enum State {
 	Intro = 0,
 	Ingame = 1,
-	Option = 2,
-	End = 3
+	End = 2
 };
 
 
@@ -99,8 +98,6 @@ void Game::update() {
 		if (countdown->getTimeLeft() == 0) {
 			gameState = End;
 		}
-		break;
-	case Option:
 		break;
 	case End:
 		//cout << countdown->getTimeLeft() << endl;
@@ -204,8 +201,6 @@ void Game::render() {
 		break;
 	case Ingame:
 		tile->render();
-		break;
-	case Option:
 		break;
 	case End:
 		if (endScreen == NULL) endScreen = new EndScreen(tile->score, "OUT OF TIME!!!");
