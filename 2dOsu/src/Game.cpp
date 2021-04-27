@@ -9,7 +9,7 @@ StartScreen* intro = NULL;
 SDL_Rect dst = { 0,0,90,14 };
 extern Button* pause;
 EndScreen* endScreen = NULL;
-
+const string chunks[16] = { "a6", "a7", "a8", "c6", "c7", "c8", "c9", "d6", "d7", "d8", "f6", "f7", "f8", "g6", "g7", "g8" };
 
 Game::Game() {
 
@@ -78,7 +78,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		else Mix_PlayMusic(music->background, -1);
 
 		//load chunks
-		string chunks[16] = { "a6", "a7", "a8", "c6", "c7", "c8", "c9", "d6", "d7", "d8", "f6", "f7", "f8", "g6", "g7", "g8" };
+
 		for (int i = 0; i < 16; i++) {
 			string path = "assets/audio/" + chunks[i] + ".wav";
 			music->chunkList[i] = Mix_LoadWAV(path.c_str());

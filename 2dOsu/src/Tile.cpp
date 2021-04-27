@@ -79,13 +79,13 @@ Tile::Tile() {
 	point = new Textbox(to_string(score), fontList[9], pointColor, 0, 50);
 	point->center(ViewportX + mapRange / 2 * EDGE);
 
-	countdown = new Timer(5);
+	countdown = new Timer(20);
 	countdownText = new Textbox(to_string(countdown->getTimeLeft()), fontList[9], pointColor, 0, 50);
 	countdownText->center(ViewportX + EDGE / 2 + (mapRange - 1) * EDGE);
 
 	preLoadText = NULL;
 	preLoadBackground = NULL;
-	//SDL_SetRenderDrawColor(Game::renderer, 199, 193, 181, 255);
+	SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
 }
 
 Tile::~Tile() {
@@ -224,6 +224,7 @@ bool Tile::check(const int& mouseX, const int& mouseY) {
 		}
 		else {
 			if (score > hScore) {
+				alpha[row][column] = 255;
 				hScore = score;
 				score = 0;
 				ofstream ofs("highScore.txt", std::ofstream::trunc);
