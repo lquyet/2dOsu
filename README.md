@@ -61,8 +61,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][images/screen_shot.png]](https://github.com/Jo3yVX/2dOsu)
-[![Screen Shot2][images/screen_shot_2.png]](https://github.com/Jo3yVX/2dOsu)
+[![Screen Shot1][intro]](https://github.com/Jo3yVX/2dOsu)
+[![Screen Shot2][ingame]](https://github.com/Jo3yVX/2dOsu)
 
 This project was built as a Big Exercise for Advanced Programming (INT2215). It took me about 1 week to make from scratch (see the commits). The only graphic library I used is SDL2 (and some extensions).
 
@@ -156,6 +156,7 @@ Project Link: [https://github.com/Jo3yVX/2dOsu](https://github.com/Jo3yVX/2dOsu)
 [issues-url]: https://github.com/Jo3yVX/2dOsu/issues
 [license-shield]: https://img.shields.io/github/license/Jo3yVX/2dOsu.svg?style=for-the-badge
 [license-url]: https://github.com/Jo3yVX/2dOsu/blob/master/LICENSE.txt
-
+[intro]: images/screen_shot.png
+[ingame]: images/screen_shot_2.png
 
 
