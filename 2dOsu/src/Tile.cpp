@@ -22,7 +22,8 @@ SDL_Color fadeColor = { 50, 168, 82 };
 SDL_Color tempFade = { 50, 168, 82 };
 Timer* countdown = NULL;
 Textbox* countdownText = NULL;
-uint32_t alpha = 255;
+uint32_t alpha[mapRange][mapRange];
+extern EndScreen* endScreen;
 
 TTF_Font* fontList[10]; //score effect  from size 30 -> 50, distance = 2
 
@@ -33,6 +34,8 @@ Tile::Tile() {
 	for (int i = 0; i < mapRange; i++) {
 		for (int j = 0; j < mapRange; j++) {
 			map[i][j] = 0;
+			//alpha
+			alpha[i][j] = 255;
 		}
 	}
 	for (int i = 0; i < mapRange - 1; i++) setBlackKey();
@@ -81,10 +84,22 @@ Tile::Tile() {
 
 	preLoadText = NULL;
 	preLoadBackground = NULL;
+
 }
 
 Tile::~Tile() {
 	TTF_CloseFont(font30);
+	pause->~Button();
+	scoreBox->~Textbox();
+	hiScore->~Textbox();
+	hiScorePoint->~Textbox();
+	timeText->~Textbox();
+	point->~Textbox();
+	countdown->~Timer();
+	countdownText->~Textbox();
+	for (int i = 0; i < 10; i++) {
+		TTF_CloseFont(fontList[i]);
+	}
 }
 
 void Tile::render() {
@@ -127,14 +142,14 @@ void Tile::render() {
 				}
 				*/
 				SDL_SetTextureColorMod(whiteTile, fadeColor.r, fadeColor.g, fadeColor.b);
-				SDL_SetTextureAlphaMod(whiteTile, alpha);
+				SDL_SetTextureAlphaMod(whiteTile, alpha[i][j]);
 				Texture::Draw(whiteTile, src, dst);
-				alpha -= 10;
-				if (alpha <= 11) {
+				alpha[i][j] -= 2;
+				if (alpha[i][j] <= 6) {
 					map[i][j] = 0;
-					alpha = 255;
+					alpha[i][j] = 255;
 				}
-				cout << alpha << endl;
+				//cout << alpha << endl;
 				//SDL_SetTextureAlphaMod(whiteTile, 255);
 				break;
 			default:
@@ -227,16 +242,16 @@ void Tile::preLoad(SDL_Color color) {
 	while (SDL_PollEvent(&e)) {
 		if (e.type == SDL_QUIT) game->setRunningState(false);
 	}
-	TTF_Font* font = TTF_OpenFont("font/Bariol.ttf", 50);
+	TTF_Font* font = TTF_OpenFont("font/Bariol.ttf", 200);
 	preLoadBackground = Texture::loadTexture("assets/backgroundBlack.png");
 	SDL_SetTextureAlphaMod(preLoadBackground, 100);
 
 	int timer = 3; //seconds
 	uint32_t start = SDL_GetTicks();
 	preLoadText = new Textbox(to_string(timer), font, color, 0, HEIGHT / 2);
-	preLoadText->center(WIDTH / 2);
+	preLoadText->center(WIDTH / 2, HEIGHT/2);
 	uint32_t tick = SDL_GetTicks() - start;
-	while (tick <= timer*1000) {
+	while (tick < timer*1000) {
 		SDL_RenderClear(Game::renderer);
 		SDL_RenderCopy(Game::renderer, preLoadBackground, NULL, NULL);
 		preLoadText->update(to_string(timer - tick / 1000), font, color);

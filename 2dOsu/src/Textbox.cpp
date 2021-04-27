@@ -9,7 +9,7 @@ Textbox::Textbox(std::string msg, TTF_Font* font, SDL_Color color, const int &x,
 }
 
 Textbox::~Textbox() {
-
+	SDL_DestroyTexture(text);
 }
 
 void Textbox::render() {
@@ -40,4 +40,9 @@ void Textbox::moveY(int distance) {
 //vertically centerize
 void Textbox::center(const int& x) {  
 	dst.x = x - dst.w / 2;
+}
+
+void Textbox::center(const int& x, const int& y) {
+	dst.x = x - dst.w / 2;
+	dst.y = y - dst.h / 2;
 }

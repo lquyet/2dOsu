@@ -22,7 +22,10 @@ StartScreen::StartScreen() {
 }
 
 StartScreen::~StartScreen() {
-
+	button[START]->~Button();
+	button[OPTION]->~Button();
+	button[EXIT]->~Button();
+	SDL_DestroyTexture(startScreenBackground);
 }
 
 void StartScreen::update() {
@@ -37,4 +40,42 @@ void StartScreen::render() {
 	button[OPTION]->render();
 	button[EXIT]->render();
 	
+}
+
+//End Screen 
+
+EndScreen::EndScreen(int score) {
+	TTF_Font* font = TTF_OpenFont("font/Bariol.ttf", 80);
+	SDL_Color color1 = { 28,135,179 };
+	SDL_Color color2 = { 0,0,0 };
+	tScore = new Textbox(to_string(score), font, color1, 0, 0);
+	TTF_CloseFont(font);
+	tScore->center(WIDTH / 2, HEIGHT / 2);
+	endScreenBackground = Texture::loadTexture("assets/backgroundBlack.png");
+	button[RESTART] = new Button("assets/button_restart.png", 0, 0);
+	button[RESTART]->focusButton = Texture::loadTexture("assets/button_restart_focus.png");
+	button[RESTART]->center(WIDTH / 2);
+	button[QUIT] = new Button("assets/button_exit.png", 0, 0);
+	button[QUIT]->focusButton = Texture::loadTexture("assets/button_exit_focus.png");
+	button[QUIT]->center(WIDTH / 2);
+}
+
+EndScreen::~EndScreen() {
+	button[RESTART]->~Button();
+	button[QUIT]->~Button();
+	tScore->~Textbox();
+	SDL_DestroyTexture(endScreenBackground);
+}
+
+void EndScreen::update() {
+	button[RESTART]->update();
+	button[QUIT]->update();
+	//no need to update textbox (static textbox)
+}
+
+void EndScreen::render() {
+	SDL_RenderCopy(Game::renderer, endScreenBackground, NULL, NULL);
+	tScore->render();
+	button[RESTART]->render();
+	button[QUIT]->render();
 }

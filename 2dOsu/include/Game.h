@@ -38,7 +38,6 @@ public:
 	void clean();
 	bool running();
 	void setViewport(const int& Vx, const int& Vy, const int& Vh, const int& Vw);
-	void loadMusic();
 	static SDL_Renderer* renderer;
 	int gameState;
 	void setRunningState(bool run) {
@@ -52,6 +51,3 @@ private:
 	int mouseX, mouseY;
 };
 
-void start();
-void option();
-void exit();

@@ -18,7 +18,9 @@ Button::Button() {
 }
 
 Button::~Button() {
-
+	SDL_DestroyTexture(button);
+	SDL_DestroyTexture(tempButton);
+	SDL_DestroyTexture(focusButton);
 }
 
 void Button::focus(bool focus) {

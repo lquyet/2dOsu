@@ -4,15 +4,11 @@ extern Tile* tile;
 extern Timer* countdown;
 SDL_Color c = { 28,135,179 };    // == point color
 Music* music = NULL;
-SDL_Texture* background = NULL;
-SDL_Texture* image = NULL;
 StartScreen* intro = NULL;
 //SDL_Color color = { 255,255,255,255 };
 SDL_Rect dst = { 0,0,90,14 };
-Button* play = NULL;
-Mix_Music* backgroundMusic = NULL;
 extern Button* pause;
-
+EndScreen* endScreen = NULL;
 
 
 Game::Game() {
@@ -27,8 +23,7 @@ enum State {
 	Intro = 0,
 	Ingame = 1,
 	Option = 2,
-	Preloading = 3,
-	End = 4
+	End = 3
 };
 
 
@@ -105,9 +100,8 @@ void Game::update() {
 		break;
 	case Option:
 		break;
-	case Preloading:
-		break;
 	case End:
+		endScreen->update();
 		break;
 	default:
 		break;
@@ -142,7 +136,10 @@ void Game::handleEvents() {
 		}
 		if (gameState == Ingame) {
 			if (countdown->isPaused == false && !(tile->check(mouseX, mouseY))) {
-				isRunning = false;
+				//isRunning = false;
+				gameState = End;
+				endScreen = new EndScreen(tile->score);
+				return;
 			}
 			if (pause->bFocus == true) {
 				if (countdown->isPaused == false) {
@@ -155,6 +152,9 @@ void Game::handleEvents() {
 				}
 			}
 		}
+		if (gameState == End) {
+
+		}
 		break;
 	default:
 		break;
@@ -163,6 +163,12 @@ void Game::handleEvents() {
 }
 
 void Game::clean() {
+	if (music != NULL) music->~Music();
+	if (tile != NULL) tile->~Tile();
+	if (countdown != NULL) countdown->~Timer();
+	if (intro != NULL) intro->~StartScreen();
+	if (endScreen != NULL) endScreen->~EndScreen();
+	if (pause != NULL) pause->~Button();
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	window = NULL;
@@ -185,9 +191,8 @@ void Game::render() {
 		break;
 	case Option:
 		break;
-	case Preloading:
-		break;
 	case End:
+		endScreen->render();
 		break;
 	default:
 		break;
