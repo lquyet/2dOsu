@@ -153,7 +153,15 @@ void Game::handleEvents() {
 			}
 		}
 		if (gameState == End) {
-
+			if (endScreen->button[QUIT]->bFocus == true) isRunning = false;
+			else if (endScreen->button[RESTART]->bFocus == true) {
+				tile->~Tile();
+				tile = new Tile();
+				tile->preLoad(c);
+				countdown->reset();
+				gameState = Ingame;
+				return;
+			}
 		}
 		break;
 	default:

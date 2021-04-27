@@ -45,26 +45,32 @@ void StartScreen::render() {
 //End Screen 
 
 EndScreen::EndScreen(int score) {
-	TTF_Font* font = TTF_OpenFont("font/Bariol.ttf", 80);
-	SDL_Color color1 = { 28,135,179 };
-	SDL_Color color2 = { 0,0,0 };
-	tScore = new Textbox(to_string(score), font, color1, 0, 0);
-	TTF_CloseFont(font);
+	TTF_Font* font80 = TTF_OpenFont("font/Bariol.ttf", 80);
+	TTF_Font* font120 = TTF_OpenFont("font/Bariol.ttf", 100);
+	SDL_Color color1 = { 255, 155, 23 };
+	SDL_Color color2 = { 221, 97, 74 };
+	tScore = new Textbox("Your Score: " + to_string(score), font80, color1, 0, 0);
+	TTF_CloseFont(font80);
 	tScore->center(WIDTH / 2, HEIGHT / 2);
-	endScreenBackground = Texture::loadTexture("assets/backgroundBlack.png");
-	button[RESTART] = new Button("assets/button_restart.png", 0, 0);
+	//endScreenBackground = Texture::loadTexture("assets/backgroundBlack.png");
+	SDL_SetRenderDrawColor(Game::renderer, 189, 209, 197, 255);
+	button[RESTART] = new Button("assets/button_restart.png", 0, 520);
 	button[RESTART]->focusButton = Texture::loadTexture("assets/button_restart_focus.png");
 	button[RESTART]->center(WIDTH / 2);
-	button[QUIT] = new Button("assets/button_exit.png", 0, 0);
-	button[QUIT]->focusButton = Texture::loadTexture("assets/button_exit_focus.png");
+	button[QUIT] = new Button("assets/button_quit.png", 0, 600);
+	button[QUIT]->focusButton = Texture::loadTexture("assets/button_quit_focus.png");
 	button[QUIT]->center(WIDTH / 2);
+	failMsg = new Textbox("YOU TAPPED A WHITE TILE!!!",font120, color2, 0, 200);
+	TTF_CloseFont(font120);
+	failMsg->center(WIDTH / 2);
 }
 
 EndScreen::~EndScreen() {
 	button[RESTART]->~Button();
 	button[QUIT]->~Button();
 	tScore->~Textbox();
-	SDL_DestroyTexture(endScreenBackground);
+	failMsg->~Textbox();
+	//SDL_DestroyTexture(endScreenBackground);
 }
 
 void EndScreen::update() {
@@ -74,8 +80,9 @@ void EndScreen::update() {
 }
 
 void EndScreen::render() {
-	SDL_RenderCopy(Game::renderer, endScreenBackground, NULL, NULL);
+	//SDL_RenderCopy(Game::renderer, endScreenBackground, NULL, NULL);
 	tScore->render();
+	failMsg->render();
 	button[RESTART]->render();
 	button[QUIT]->render();
 }

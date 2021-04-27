@@ -84,7 +84,7 @@ Tile::Tile() {
 
 	preLoadText = NULL;
 	preLoadBackground = NULL;
-
+	//SDL_SetRenderDrawColor(Game::renderer, 199, 193, 181, 255);
 }
 
 Tile::~Tile() {

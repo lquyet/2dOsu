@@ -38,4 +38,5 @@ public:
 private:
 	SDL_Texture* endScreenBackground;
 	Textbox* tScore;
+	Textbox* failMsg;
 };
