@@ -157,8 +157,8 @@ Project Link: [https://github.com/Jo3yVX/2dOsu](https://github.com/Jo3yVX/2dOsu)
 [stars-url]: https://github.com/Jo3yVX/2dOsu/stargazers
 [issues-shield]: https://img.shields.io/github/issues/Jo3yVX/2dOsu.svg?style=for-the-badge
 [issues-url]: https://github.com/Jo3yVX/2dOsu/issues
-[license-shield]: https://img.shields.io/github/license/Jo3yVX/2dOsu.svg?style=for-the-badge
 [license-url]: https://github.com/Jo3yVX/2dOsu/blob/main/LICENSE
+[license-shield]: https://img.shields.io/github/license/Jo3yVX/2dOsu.svg?style=for-the-badge
 [intro]: images/screen_shot.png
 [ingame]: images/screen_shot_2.png
 [end]: images/screen_shot_3.png
