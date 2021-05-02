@@ -67,6 +67,8 @@
 
 This project was built as a Big Exercise for Advanced Programming (INT2215). It took me about 1 week to make from scratch (see the commits). The only graphic library I used is SDL2 (and some extensions).
 
+Expected score: A;
+Game loop credits to https://www.youtube.com/watch?v=44tO977slsU&list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx&index=3
 
 ### Built With
 
@@ -155,8 +157,8 @@ Project Link: [https://github.com/Jo3yVX/2dOsu](https://github.com/Jo3yVX/2dOsu)
 [stars-url]: https://github.com/Jo3yVX/2dOsu/stargazers
 [issues-shield]: https://img.shields.io/github/issues/Jo3yVX/2dOsu.svg?style=for-the-badge
 [issues-url]: https://github.com/Jo3yVX/2dOsu/issues
+[license-url]: https://github.com/Jo3yVX/2dOsu/blob/main/LICENSE
 [license-shield]: https://img.shields.io/github/license/Jo3yVX/2dOsu.svg?style=for-the-badge
-[license-url]: https://github.com/Jo3yVX/2dOsu/blob/master/LICENSE.txt
 [intro]: images/screen_shot.png
 [ingame]: images/screen_shot_2.png
 [end]: images/screen_shot_3.png
