@@ -199,7 +199,6 @@ void Tile::update() {
 		countdownText->update(to_string(countdown->getTimeLeft()), fontList[9], pointColor);
 		countdownText->center(ViewportX + EDGE / 2 + (mapRange - 1) * EDGE);
 	}
-
 }
 
 void Tile::setBlackKey(bool isClick) {
@@ -216,7 +215,7 @@ void Tile::setBlackKey(bool isClick) {
 			rCol = rand() % mapRange;
 		} while (map[rRow][rCol] != 0 || map[rRow][rCol] == 3);
 	}
-	int r = rand() % 20;
+	int r = rand() % 40;
 	if (r < 2) map[rRow][rCol] = 3;  //just for 10% getting a bonus time tile
 	else if (r == 2 || r == 3) map[rRow][rCol] = 4; // 10% getting a bonus point
 	else map[rRow][rCol] = 1;
@@ -327,4 +326,5 @@ void fadeEffect(SDL_Texture* tx, SDL_Color color,int map[mapRange][mapRange],uin
 		map[row][col] = 0;
 		alpha[row][col] = 255;
 	}
+	cout << 1 << endl;
 }

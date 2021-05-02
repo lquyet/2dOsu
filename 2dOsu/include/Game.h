@@ -10,6 +10,7 @@
 #include "Button.h"
 #include "Timer.h"
 #include "Music.h"
+#include "OptionMenu.h"
 #undef main  //sdl_main has already defined in sdl.h, that's why we need this line
 using namespace std;
 

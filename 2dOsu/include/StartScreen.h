@@ -8,6 +8,7 @@ class Textbox;
 enum StartScreenButtonDetail {
 	START = 0,
 	EXIT = 1, 
+	OPTION = 2
 };
 
 class StartScreen {
@@ -16,7 +17,7 @@ public:
 	~StartScreen();
 	void update();
 	void render();
-	Button* button[2];
+	Button* button[3];
 private:
 	SDL_Texture* startScreenBackground;
 

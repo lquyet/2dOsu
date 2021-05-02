@@ -10,6 +10,7 @@ public:
 	void update();
 	void render();
 	void center(const int &x);
+	void scale(float f);
 	//void onClick(void func());
 	SDL_Rect dst;
 	SDL_Color focusColor;

@@ -1,6 +1,12 @@
 #pragma once
 #include "Textbox.h"
 
+enum Character {
+	HARRY = 0,
+	VOLDEMORT = 1,
+	DUMBLEDORE = 2
+};
+
 class OptionMenu {
 public:
 	OptionMenu();

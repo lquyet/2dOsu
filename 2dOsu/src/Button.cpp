@@ -63,3 +63,8 @@ void Button::center(const int& x) {
 //void Button::onClick(void func()) {
 //	func();
 //}
+
+void Button::scale(float f) {
+	dst.w = floor(dst.w * f);
+	dst.h = floor(dst.h * f);
+}

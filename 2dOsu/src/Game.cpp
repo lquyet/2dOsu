@@ -9,6 +9,7 @@ StartScreen* intro = NULL;
 SDL_Rect dst = { 0,0,90,14 };
 extern Button* pause;
 EndScreen* endScreen = NULL;
+OptionMenu* optionMenu = NULL;
 const string chunks[16] = { "a6", "a7", "a8", "c6", "c7", "c8", "c9", "d6", "d7", "d8", "f6", "f7", "f8", "g6", "g7", "g8" };
 
 Game::Game() {
@@ -22,7 +23,8 @@ Game::~Game() {
 enum State {
 	Intro = 0,
 	Ingame = 1,
-	End = 2
+	End = 2,
+	Option = 3
 };
 
 
@@ -61,7 +63,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	gameState = Intro;
 	intro = new StartScreen();
-	//tile = new Tile();
+	optionMenu = new OptionMenu();
 
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
 		cout << Mix_GetError() << endl;
@@ -103,6 +105,9 @@ void Game::update() {
 		//cout << countdown->getTimeLeft() << endl;
 		endScreen->update();
 		break;
+	case Option:
+		optionMenu->update();
+		break;
 	default:
 		break;
 	}
@@ -132,6 +137,10 @@ void Game::handleEvents() {
 			}
 			else if (intro->button[EXIT]->bFocus == true) {
 				isRunning = false;
+			}
+			else if (intro->button[OPTION]->bFocus == true) {
+				gameState = Option;
+				//optionMenu = new OptionMenu();
 			}
 		}
 		if (gameState == Ingame) {
@@ -168,6 +177,9 @@ void Game::handleEvents() {
 				gameState = Ingame;
 				return;
 			}
+		}
+		if (gameState == Option) {
+
 		}
 		break;
 	default:
@@ -206,6 +218,9 @@ void Game::render() {
 	case End:
 		if (endScreen == NULL) endScreen = new EndScreen(tile->score,tile->hScore, "OUT OF TIME!!!");
 		endScreen->render();
+		break;
+	case Option:
+		optionMenu->render();
 		break;
 	default:
 		break;
