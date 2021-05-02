@@ -139,7 +139,8 @@ void Game::handleEvents() {
 				//isRunning = false;
 				gameState = End;
 				//endState = true;
-				endScreen = new EndScreen(tile->score, "YOU TAPPED A WHITE TILE!!!");
+				//if (tile->score >= tile->hScore) 
+				endScreen = new EndScreen(tile->score, tile->hScore, "YOU TAPPED A WHITE TILE!!!");
 				return;
 			}
 			if (pause->bFocus == true) {
@@ -203,7 +204,7 @@ void Game::render() {
 		tile->render();
 		break;
 	case End:
-		if (endScreen == NULL) endScreen = new EndScreen(tile->score, "OUT OF TIME!!!");
+		if (endScreen == NULL) endScreen = new EndScreen(tile->score,tile->hScore, "OUT OF TIME!!!");
 		endScreen->render();
 		break;
 	default:
@@ -217,12 +218,3 @@ void Game::render() {
 bool Game::running() {
 	return isRunning;
 }
-
-void Game::setViewport(const int& Vx, const int& Vy, const int& Vh, const int& Vw) {
-	viewport.x = Vx;
-	viewport.y = Vy;
-	viewport.h = Vh;
-	viewport.w = Vw;
-	SDL_RenderSetViewport(renderer, &viewport);
-}
-

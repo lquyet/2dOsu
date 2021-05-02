@@ -29,7 +29,7 @@ enum EndScreenButtonDetail {
 
 class EndScreen {
 public:
-	EndScreen(int score, std::string msg);
+	EndScreen(int score,int hiScore, std::string msg);
 	~EndScreen();
 	void update();
 	void render();
@@ -38,4 +38,5 @@ private:
 	SDL_Texture* endScreenBackground;
 	Textbox* tScore;
 	Textbox* failMsg;
+	Textbox* highestScore;
 };

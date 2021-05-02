@@ -23,7 +23,7 @@ public:
 	int getLastCol() { return lastColumn; }
 	void preLoad(SDL_Color color);
 	int score;
-
+	int hScore;
 private:
 	int map[mapRange][mapRange];
 	SDL_Texture* whiteTile;
@@ -32,7 +32,7 @@ private:
 	int lastRow, lastColumn;
 
 	SDL_Texture* scoreTexture;
-	int hScore;
+
 	Textbox* preLoadText;
 	SDL_Texture* preLoadBackground;
 	//Button* pause;

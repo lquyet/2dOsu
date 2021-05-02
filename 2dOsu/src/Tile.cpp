@@ -5,7 +5,6 @@
 #include "../include/Timer.h"
 #include <string>
 #include <fstream>
-#include <SDL_thread.h>
 class Textbox;
 extern Music* music;
 extern Game* game;
@@ -18,17 +17,19 @@ Textbox* hiScorePoint = NULL;
 Textbox* timeText = NULL;
 Textbox* point = NULL;
 SDL_Color pointColor = { 28,135,179 };
-SDL_Color fadeColor = { 50, 168, 82 };
-SDL_Color tempFade = { 50, 168, 82 };
+SDL_Color fadeGrayTileColor = { 50, 168, 82 };
+//SDL_Color tempFade = { 50, 168, 82 };
 Timer* countdown = NULL;
 Textbox* countdownText = NULL;
 uint32_t alpha[mapRange][mapRange];
 extern EndScreen* endScreen;
 SDL_Color wrong = { 200, 0, 0 };
+SDL_Color bonusTime = { 235, 207, 52 };
+SDL_Color bonusPoint = { 52, 235, 226 };
 
 TTF_Font* fontList[10]; //score effect  from size 30 -> 50, distance = 2
 
-
+void fadeEffect(SDL_Texture* tx, SDL_Color color, int map[mapRange][mapRange], uint32_t alpha[mapRange][mapRange], const int& row, const int& col, const SDL_Rect &src,const SDL_Rect &dst);
 
 Tile::Tile() {
 	//empty the map
@@ -114,18 +115,18 @@ void Tile::render() {
 			dst.y =  HEIGHT - mapRange * EDGE + ViewportY + i * 160 - OFFSET_BOTTOM; //row
 
 			switch (type) {
-			case 0:
+			case 0: //raw white tile
 				SDL_SetTextureAlphaMod(whiteTile, 255);
 				SDL_SetTextureColorMod(whiteTile, 255, 255, 255);
 				Texture::Draw(whiteTile, src, dst);
 				break;
-			case 1:
+			case 1: //raw black (actually gray) tile
 				SDL_SetTextureAlphaMod(whiteTile, 255);
 				SDL_SetTextureColorMod(whiteTile, 100, 100, 100);
 				Texture::Draw(whiteTile, src, dst);
 				//Texture::Draw(blackTile, src, dst);
 				break;
-			case 2:  //fucked up with fading effect
+			case 2:  // fading gray tile with green
 				/*
 				tempFade.r+=3;
 				tempFade.g+=3;
@@ -139,10 +140,10 @@ void Tile::render() {
 				//cout << tempFade.r << " " << tempFade.g << " " << tempFade.b << endl;
 				if (tempFade.r >= 254 || tempFade.g >= 254 || tempFade.b >= 254) {
 					map[i][j] = 0;
-					tempFade = fadeColor;
+					tempFade = fadeGrayTileColor;
 				}
-				*/
-				SDL_SetTextureColorMod(whiteTile, fadeColor.r, fadeColor.g, fadeColor.b);
+				
+				SDL_SetTextureColorMod(whiteTile, fadeGrayTileColor.r, fadeGrayTileColor.g, fadeGrayTileColor.b);
 				SDL_SetTextureAlphaMod(whiteTile, alpha[i][j]);
 				Texture::Draw(whiteTile, src, dst);
 				alpha[i][j] -= 2;
@@ -150,8 +151,26 @@ void Tile::render() {
 					map[i][j] = 0;
 					alpha[i][j] = 255;
 				}
+				*/
+				fadeEffect(whiteTile, fadeGrayTileColor, map, alpha, i, j, src, dst);
 				//cout << alpha << endl;
 				//SDL_SetTextureAlphaMod(whiteTile, 255);
+				break;
+			case 3: // raw orange tile
+				SDL_SetTextureAlphaMod(whiteTile, 255);
+				SDL_SetTextureColorMod(whiteTile, bonusTime.r, bonusTime.g, bonusTime.b);
+				Texture::Draw(whiteTile, src, dst);
+				break;
+			case 4: // raw blue (?) tile
+				SDL_SetTextureAlphaMod(whiteTile, 255);
+				SDL_SetTextureColorMod(whiteTile, bonusPoint.r, bonusPoint.g, bonusPoint.b);
+				Texture::Draw(whiteTile, src, dst);
+				break;
+			case 5: //fading orange tile
+				fadeEffect(whiteTile, bonusTime, map, alpha, i, j, src, dst);
+				break;
+			case 6: //fading blue (?) tile
+				fadeEffect(whiteTile, bonusPoint, map, alpha, i, j, src, dst);
 				break;
 			default:
 				break;
@@ -189,15 +208,20 @@ void Tile::setBlackKey(bool isClick) {
 		do {
 			rRow = rand() % mapRange;
 			rCol = rand() % mapRange;
-		} while (map[rRow][rCol] == 1 || map[rRow][rCol] == 2 || (lastRow == rRow && lastColumn == rCol));
+		} while (map[rRow][rCol] != 0 || (lastRow == rRow && lastColumn == rCol));
 	}
 	else {
 		do {
 			rRow = rand() % mapRange;
 			rCol = rand() % mapRange;
-		} while (map[rRow][rCol] == 1 || map[rRow][rCol] == 2);
+		} while (map[rRow][rCol] != 0 || map[rRow][rCol] == 3);
 	}
-	map[rRow][rCol] = 1;  // clickable, change color to black
+	int r = rand() % 20;
+	if (r < 2) map[rRow][rCol] = 3;  //just for 10% getting a bonus time tile
+	else if (r == 2 || r == 3) map[rRow][rCol] = 4; // 10% getting a bonus point
+	else map[rRow][rCol] = 1;
+	cout << r << endl;
+	//map[rRow][rCol] = 1;  // clickable, change color to black
 	cout << "(" << rRow << ":" << rCol << ")" << "       " << "(" << lastRow << ":" << lastColumn << ")" << endl;
 }
 
@@ -211,10 +235,23 @@ bool Tile::check(const int& mouseX, const int& mouseY) {
 
 		int row = floor(tempY / EDGE);
 		int column = floor(tempX / EDGE);
-		if (map[row][column] == 1) {
+		if (map[row][column] != 0 && map[row][column] != 2 && map[row][column] != 5) {
 			int note = rand() % 16;
 			Mix_PlayChannel(-1, music->chunkList[note], 0);
-			map[row][column] = 2;
+			switch (map[row][column])
+			{
+			case 3:
+				countdown->addBonusTime(5);
+				map[row][column] = 5;
+				break;
+			case 4:
+				score += 3;
+				map[row][column] = 6;
+				break;
+			default:
+				map[row][column] = 2;
+				break;
+			}
 			score++;
 			point->update(to_string(score), fontList[9], pointColor);
 			lastRow = row;
@@ -226,7 +263,7 @@ bool Tile::check(const int& mouseX, const int& mouseY) {
 			if (score > hScore) {
 				alpha[row][column] = 255;
 				hScore = score;
-				score = 0;
+				//score = 0;
 				ofstream ofs("highScore.txt", std::ofstream::trunc);
 				ofs << hScore;
 				ofs.close();
@@ -241,25 +278,53 @@ bool Tile::check(const int& mouseX, const int& mouseY) {
 void Tile::preLoad(SDL_Color color) {
 	//this function with run synchronously, so i have to create a (new) temporary event handler in this 3-second period
 	SDL_Event e;
-	while (SDL_PollEvent(&e)) {
-		if (e.type == SDL_QUIT) game->setRunningState(false);
-	}
+	SDL_Color guideTextColor1 = pointColor;
+	SDL_Color guideTextColor2 = bonusTime; 
+	SDL_Color guideTextColor3 = bonusPoint;
 	TTF_Font* font = TTF_OpenFont("font/Bariol.ttf", 200);
+	TTF_Font* guide = TTF_OpenFont("font/Bariol.ttf", 50);
+	Textbox* guideTime = new Textbox("This color will give you more time", guide, guideTextColor2, 0, 0);
+	guideTime->center(WIDTH / 2, HEIGHT / 2 + 100);
+	Textbox* guidePoint = new Textbox("This color will give you more points", guide, guideTextColor3, 0, 0);
+	guidePoint->center(WIDTH / 2, HEIGHT / 2 + 150);
 	preLoadBackground = Texture::loadTexture("assets/backgroundBlack.png");
 	SDL_SetTextureAlphaMod(preLoadBackground, 100);
-
-	int timer = 3; //seconds
+	int timer = 4; //seconds
 	uint32_t start = SDL_GetTicks();
 	preLoadText = new Textbox(to_string(timer), font, color, 0, HEIGHT / 2);
 	preLoadText->center(WIDTH / 2, HEIGHT/2);
 	uint32_t tick = SDL_GetTicks() - start;
 	while (tick < timer*1000) {
+		SDL_PollEvent(&e);
+		if (e.type == SDL_QUIT) {
+			game->setRunningState(false);
+			return;
+		}
 		SDL_RenderClear(Game::renderer);
 		SDL_RenderCopy(Game::renderer, preLoadBackground, NULL, NULL);
-		preLoadText->update(to_string(timer - tick / 1000), font, color);
+		if (tick >= 3000) {
+			preLoadText->update("Click all non-white tiles in 20 seconds", guide, guideTextColor1);
+			preLoadText->center(WIDTH / 2, HEIGHT / 2);
+			guideTime->render();
+			guidePoint->render();
+		} else preLoadText->update(to_string(timer - tick / 1000 - 1), font, color);
 		preLoadText->render();
 		SDL_RenderPresent(Game::renderer);
 		tick = SDL_GetTicks() - start;
 	}
+	guideTime->~Textbox();
+	guidePoint->~Textbox();
 	TTF_CloseFont(font);
+	TTF_CloseFont(guide);
+}
+
+void fadeEffect(SDL_Texture* tx, SDL_Color color,int map[mapRange][mapRange],uint32_t alpha[mapRange][mapRange], const int& row, const int& col, const SDL_Rect &src, const SDL_Rect &dst) {
+	SDL_SetTextureColorMod(tx, color.r, color.g, color.b);
+	SDL_SetTextureAlphaMod(tx, alpha[row][col]);
+	Texture::Draw(tx, src, dst);
+	alpha[row][col] -= 2;
+	if (alpha[row][col] <= 6) {
+		map[row][col] = 0;
+		alpha[row][col] = 255;
+	}
 }

@@ -44,20 +44,22 @@ void StartScreen::render() {
 
 //End Screen 
 
-EndScreen::EndScreen(int score, std::string msg) {
+EndScreen::EndScreen(int score,int hiScore, std::string msg) {
 	TTF_Font* font80 = TTF_OpenFont("font/Bariol.ttf", 80);
 	TTF_Font* font120 = TTF_OpenFont("font/Bariol.ttf", 100);
 	SDL_Color color1 = { 255, 155, 23 };
 	SDL_Color color2 = { 221, 97, 74 };
 	tScore = new Textbox("Your Score: " + to_string(score), font80, color1, 0, 0);
-	TTF_CloseFont(font80);
 	tScore->center(WIDTH / 2, HEIGHT / 2);
+	highestScore = new Textbox("Highest Score: " + to_string(hiScore), font80, color1, tScore->dst.x, tScore->dst.y + 80);
+	//highestScore->center(WIDTH / 2, HEIGHT / 2 + 80);
+	TTF_CloseFont(font80);
 	//endScreenBackground = Texture::loadTexture("assets/backgroundBlack.png");
 	SDL_SetRenderDrawColor(Game::renderer, 189, 209, 197, 255);
-	button[RESTART] = new Button("assets/button_restart.png", 0, 520);
+	button[RESTART] = new Button("assets/button_restart.png", 0, 570);
 	button[RESTART]->focusButton = Texture::loadTexture("assets/button_restart_focus.png");
 	button[RESTART]->center(WIDTH / 2);
-	button[QUIT] = new Button("assets/button_quit.png", 0, 600);
+	button[QUIT] = new Button("assets/button_quit.png", 0, 650);
 	button[QUIT]->focusButton = Texture::loadTexture("assets/button_quit_focus.png");
 	button[QUIT]->center(WIDTH / 2);
 	failMsg = new Textbox(msg,font120, color2, 0, 200);
@@ -70,6 +72,7 @@ EndScreen::~EndScreen() {
 	button[QUIT]->~Button();
 	tScore->~Textbox();
 	failMsg->~Textbox();
+	highestScore->~Textbox();
 	//SDL_DestroyTexture(endScreenBackground);
 }
 
@@ -82,6 +85,7 @@ void EndScreen::update() {
 void EndScreen::render() {
 	//SDL_RenderCopy(Game::renderer, endScreenBackground, NULL, NULL);
 	tScore->render();
+	highestScore->render();
 	failMsg->render();
 	button[RESTART]->render();
 	button[QUIT]->render();

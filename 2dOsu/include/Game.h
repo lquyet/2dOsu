@@ -37,7 +37,7 @@ public:
 	void render();
 	void clean();
 	bool running();
-	void setViewport(const int& Vx, const int& Vy, const int& Vh, const int& Vw);
+	
 	static SDL_Renderer* renderer;
 	int gameState;
 	void setRunningState(bool run) {
