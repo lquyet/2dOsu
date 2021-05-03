@@ -195,6 +195,7 @@ void Game::clean() {
 	if (intro != NULL) intro->~StartScreen();
 	if (endScreen != NULL) endScreen->~EndScreen();
 	if (pause != NULL) pause->~Button();
+	if (optionMenu != NULL) optionMenu->~OptionMenu();
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	window = NULL;

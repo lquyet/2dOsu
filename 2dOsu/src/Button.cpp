@@ -11,6 +11,7 @@ Button::Button(std::string pathToImage,const int &x,const int &y) {
 	dst.y = y;
 	tempButton = button;
 	focusButton = NULL;
+	focusColor = { 255,255,255 }; //default: white
 }
 
 Button::Button() {
