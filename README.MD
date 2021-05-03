@@ -62,6 +62,7 @@
 ## About The Project
 
 [![INTRO][intro]](https://github.com/Jo3yVX/2dOsu)
+[![OPTION][option]](https://github.com/Jo3yVX/2dOsu)
 [![INGAME][ingame]](https://github.com/Jo3yVX/2dOsu)
 [![ENDGAME][end]](https://github.com/Jo3yVX/2dOsu)
 
@@ -159,7 +160,8 @@ Project Link: [https://github.com/Jo3yVX/2dOsu](https://github.com/Jo3yVX/2dOsu)
 [issues-url]: https://github.com/Jo3yVX/2dOsu/issues
 [license-url]: https://github.com/Jo3yVX/2dOsu/blob/main/LICENSE
 [license-shield]: https://img.shields.io/github/license/Jo3yVX/2dOsu.svg?style=for-the-badge
-[intro]: images/screen_shot.png
-[ingame]: images/screen_shot_2.png
-[end]: images/screen_shot_3.png
+[intro]: images/intro.png
+[option]: images/character.png
+[ingame]: images/ingame.png
+[end]: images/end.png
 
