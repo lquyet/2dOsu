@@ -17,7 +17,9 @@ Textbox* hiScorePoint = NULL;
 Textbox* timeText = NULL;
 Textbox* point = NULL;
 SDL_Color pointColor = { 28,135,179 };
+SDL_Color hiScoreColor = { 106, 113, 125 };
 SDL_Color fadeGrayTileColor = { 50, 168, 82 };
+SDL_Color timerColor = { 227, 140, 34 };
 //SDL_Color tempFade = { 50, 168, 82 };
 Timer* countdown = NULL;
 Textbox* countdownText = NULL;
@@ -71,7 +73,7 @@ Tile::Tile() {
 	hiScore = new Textbox("Hi - Score", font30, fontColor, 0, 10); 
 	hiScore->center(ViewportX + EDGE / 2);
 
-	hiScorePoint = new Textbox(to_string(hScore), fontList[9], pointColor, 0, 50);
+	hiScorePoint = new Textbox(to_string(hScore), fontList[9], hiScoreColor, 0, 50);
 	hiScorePoint->center(ViewportX + EDGE / 2);
 
 	timeText = new Textbox("Time", font30, fontColor, 0, 10);
@@ -81,7 +83,7 @@ Tile::Tile() {
 	point->center(ViewportX + mapRange / 2 * EDGE);
 
 	countdown = new Timer(20);
-	countdownText = new Textbox(to_string(countdown->getTimeLeft()), fontList[9], pointColor, 0, 50);
+	countdownText = new Textbox(to_string(countdown->getTimeLeft()), fontList[9], timerColor, 0, 50);
 	countdownText->center(ViewportX + EDGE / 2 + (mapRange - 1) * EDGE);
 
 	preLoadText = NULL;
@@ -196,7 +198,7 @@ void Tile::update() {
 	if (countdown->isPaused == false) {
 		point->center(ViewportX + mapRange / 2 * EDGE);
 		hiScorePoint->center(ViewportX + EDGE / 2);
-		countdownText->update(to_string(countdown->getTimeLeft()), fontList[9], pointColor);
+		countdownText->update(to_string(countdown->getTimeLeft()), fontList[9], timerColor);
 		countdownText->center(ViewportX + EDGE / 2 + (mapRange - 1) * EDGE);
 	}
 }
@@ -219,9 +221,8 @@ void Tile::setBlackKey(bool isClick) {
 	if (r < 2) map[rRow][rCol] = 3;  //just for 10% getting a bonus time tile
 	else if (r == 2 || r == 3) map[rRow][rCol] = 4; // 10% getting a bonus point
 	else map[rRow][rCol] = 1;
-	cout << r << endl;
 	//map[rRow][rCol] = 1;  // clickable, change color to black
-	cout << "(" << rRow << ":" << rCol << ")" << "       " << "(" << lastRow << ":" << lastColumn << ")" << endl;
+	//cout << "(" << rRow << ":" << rCol << ")" << "       " << "(" << lastRow << ":" << lastColumn << ")" << endl;
 }
 
 bool Tile::check(const int& mouseX, const int& mouseY) {
@@ -326,5 +327,4 @@ void fadeEffect(SDL_Texture* tx, SDL_Color color,int map[mapRange][mapRange],uin
 		map[row][col] = 0;
 		alpha[row][col] = 255;
 	}
-	cout << 1 << endl;
 }
