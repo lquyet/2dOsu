@@ -69,7 +69,8 @@
 This project was built as a Big Exercise for Advanced Programming (INT2215). It took me about 1 week to make from scratch (see the commits). The only graphic library I used is SDL2 (and some extensions).
 
 Expected score: A;
-Game loop credits to https://www.youtube.com/watch?v=44tO977slsU&list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx&index=3
+
+Game loop credits to [link](https://www.youtube.com/watch?v=44tO977slsU&list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx&index=3)
 
 ### Built With
 
