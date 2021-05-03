@@ -11,11 +11,9 @@ public:
 	void center(const int& x);
 	void center(const int& x, const int& y);
 	std::string message;
-	//SDL_Color color;
 	void moveX(int distance);
 	void moveY(int distance);
 	SDL_Rect dst;
 private:
 	SDL_Texture* text;
-	//TTF_Font* tFont;
 };

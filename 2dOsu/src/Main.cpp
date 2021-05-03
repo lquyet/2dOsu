@@ -16,7 +16,7 @@ int main() {
 	Uint32 frameStart;
 	int frameTime;
 	game = new Game();
-	game->init("Super Hard Osu - Harry Potter Collection", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, false);
+	game->init("2D Osu - Harry Potter Edition", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, false);
 	while (game->running()) {
 		frameStart = SDL_GetTicks();
 		game->handleEvents();

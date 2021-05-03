@@ -2,14 +2,18 @@
 
 extern Tile* tile;
 extern Timer* countdown;
-SDL_Color c = { 28,135,179 };    // == point color
-Music* music = NULL;
-StartScreen* intro = NULL;
-//SDL_Color color = { 255,255,255,255 };
-SDL_Rect dst = { 0,0,90,14 };
 extern Button* pause;
+
+SDL_Color c = { 28,135,179 };   // == point color
+
+Music* music = NULL;
+
+StartScreen* intro = NULL;
 EndScreen* endScreen = NULL;
 OptionMenu* optionMenu = NULL;
+
+SDL_Rect dst = { 0,0,90,14 };
+
 const string chunks[16] = { "a6", "a7", "a8", "c6", "c7", "c8", "c9", "d6", "d7", "d8", "f6", "f7", "f8", "g6", "g7", "g8" };
 
 Game::Game() {

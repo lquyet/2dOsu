@@ -3,7 +3,6 @@
 OptionMenu::OptionMenu() {
 	SDL_Color color = { 0,0,0 };
 	TTF_Font* font = TTF_OpenFont("font/Bariol.ttf", 50);
-	//SDL_SetRenderDrawColor(Game::renderer, 52, 235, 229, 200); //200 alpha
 	guideText = new Textbox("Choose your favorite character:", font, color, 20, 20);
 	backToMenu = new Button("assets/button_back.png", 0, 700);
 	backToMenu->focusButton = Texture::loadTexture("assets/button_back_focus.png");
