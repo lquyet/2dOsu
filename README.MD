@@ -98,7 +98,7 @@ These things are required:
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-Click "START" to start playing. You have to click on the black tile(s) as fast as possible in 20 seconds. The more tiles you can click, the higher score you get.
+Click "START" to start playing. You have to click on the non-white tiles(s) as fast as possible in 20 seconds. The more tiles you can click, the higher score you get.
 If you click on a white tile or run out of time, the game will stop immediately.
 
 <!-- ROADMAP -->
