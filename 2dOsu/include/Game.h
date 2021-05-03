@@ -44,7 +44,10 @@ public:
 	void setRunningState(bool run) {
 		isRunning = run;
 	}
+	int playerCharacter;
 private:
+	SDL_Texture* cursorTx;
+	SDL_Rect cursorRect;
 	SDL_Texture* background;
 	bool isRunning;
 	SDL_Window* window;

@@ -30,6 +30,7 @@ enum State {
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) {
 	int flag = 0;
+	playerCharacter = DEFAULT;
 	if (fullscreen) flag = SDL_WINDOW_FULLSCREEN;
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
 		cout << "SDL Init" << endl;
@@ -91,6 +92,29 @@ void Game::update() {
 	SDL_GetMouseState(&mouseX, &mouseY); //update mouse position
 	//cout << "X: " << mouseX << "  " << "Y: " << mouseY << endl;
 	//cout << countdown->getTimeLeft() << endl;
+	if (playerCharacter != DEFAULT) {
+		SDL_ShowCursor(0); // hide default os's cursor
+	}
+	else {
+		SDL_ShowCursor(1); //return to default os's cursor
+	}
+	//draw cursor on screen
+	switch (playerCharacter) {
+	case HARRY:
+	case DUMBLEDORE:
+	case VOLDEMORT:
+		if (cursorTx != NULL) {
+			cursorRect.x = mouseX;
+			cursorRect.y = mouseY;
+			cursorRect.w = cursorRect.h = 32; //idk if it's too small ...
+		}
+		break;
+	case DEFAULT:
+		break;
+	default:
+		break;
+	}
+
 	switch (gameState) {
 	case Intro:
 		intro->update();
@@ -111,6 +135,7 @@ void Game::update() {
 	default:
 		break;
 	}
+
 
 	//tile->update();
 	
@@ -140,6 +165,7 @@ void Game::handleEvents() {
 			}
 			else if (intro->button[OPTION]->bFocus == true) {
 				gameState = Option;
+				return;
 				//optionMenu = new OptionMenu();
 			}
 		}
@@ -179,6 +205,20 @@ void Game::handleEvents() {
 			}
 		}
 		if (gameState == Option) {
+			if (optionMenu->backToMenu->bFocus == true) {
+				gameState = Intro;
+				return;
+			}
+			else {
+				for (int i = 0; i < 3; i++) {
+					if (optionMenu->character[i]->bFocus == true) {
+						playerCharacter = i; //see (enum) Character for more detail
+						cursorTx = Texture::loadTexture(optionMenu->characterTxPath[i].c_str());
+						gameState = Intro;
+						return;
+					}
+				}
+			}
 
 		}
 		break;
@@ -209,6 +249,7 @@ void Game::render() {
 	SDL_RenderClear(renderer);
 	//SDL_RenderCopy(renderer, background, NULL, NULL);
 	//SDL_RenderCopy(renderer, image, NULL, &dst);
+
 	switch (gameState) {
 	case Intro:
 		intro->render();
@@ -227,7 +268,9 @@ void Game::render() {
 		break;
 	}
 	//tile->render();
-	
+	if (cursorTx != NULL) {
+		SDL_RenderCopy(renderer, cursorTx, NULL, &cursorRect);
+	}
 	SDL_RenderPresent(renderer);
 }
 
