@@ -262,7 +262,13 @@ void Game::render() {
 		tile->render();
 		break;
 	case End:
-		if (endScreen == NULL) endScreen = new EndScreen(tile->score,tile->hScore, "OUT OF TIME!!!");
+		if (endScreen == NULL) {
+			if (tile->score > tile->hScore) {
+				tile->hScore = tile->score;
+				tile->saveHighScore();
+			}
+			endScreen = new EndScreen(tile->score, tile->hScore, "OUT OF TIME!!!");
+		}
 		endScreen->render();
 		break;
 	case Option:

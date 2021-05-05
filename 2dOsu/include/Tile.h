@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include "Button.h"
 #include "Textbox.h"
+#include <fstream>
 const int mapRange = 4;
 const int EDGE = 160;
 const int OFFSET_BOTTOM = 40;
@@ -22,6 +23,7 @@ public:
 	int getLastRow() { return lastRow; }
 	int getLastCol() { return lastColumn; }
 	void preLoad(SDL_Color color);
+	void saveHighScore();
 	int score;
 	int hScore;
 private:

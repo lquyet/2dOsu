@@ -4,7 +4,7 @@
 #include "../include/Textbox.h"
 #include "../include/Timer.h"
 #include <string>
-#include <fstream>
+
 class Textbox;
 extern Music* music;
 extern Game* game;
@@ -240,9 +240,7 @@ bool Tile::check(const int& mouseX, const int& mouseY) {
 				alpha[row][column] = 255;
 				hScore = score;
 				//score = 0;
-				ofstream ofs("highScore.txt", std::ofstream::trunc);
-				ofs << hScore;
-				ofs.close();
+				saveHighScore();
 			}
 		}
 		return false;
@@ -303,4 +301,10 @@ void fadeEffect(SDL_Texture* tx, SDL_Color color,int map[mapRange][mapRange],uin
 		map[row][col] = 0;
 		alpha[row][col] = 255;
 	}
+}
+
+void Tile::saveHighScore() {
+	ofstream ofs("highScore.txt", std::ofstream::trunc);
+	ofs << hScore;
+	ofs.close();
 }
