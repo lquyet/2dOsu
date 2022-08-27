@@ -8,7 +8,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/Jo3yVX/2dOsu">
+  <a href="https://github.com/lquyet/2dOsu">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -17,14 +17,14 @@
   <p align="center">
     A tiny game made with SDL2 for INT-2215 (Advanced Programming)
     <br />
-    <a href="https://github.com/Jo3yVX/2dOsu"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/lquyet/2dOsu"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Jo3yVX/2dOsu">View Demo</a>
+    <a href="https://github.com/lquyet/2dOsu">View Demo</a>
     ·
-    <a href="https://github.com/Jo3yVX/2dOsu/issues">Report Bug</a>
+    <a href="https://github.com/lquyet/2dOsu/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Jo3yVX/2dOsu/issues">Request Feature</a>
+    <a href="https://github.com/lquyet/2dOsu/issues">Request Feature</a>
   </p>
 </p>
 
@@ -61,10 +61,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![INTRO][intro]](https://github.com/Jo3yVX/2dOsu)
-[![OPTION][option]](https://github.com/Jo3yVX/2dOsu)
-[![INGAME][ingame]](https://github.com/Jo3yVX/2dOsu)
-[![ENDGAME][end]](https://github.com/Jo3yVX/2dOsu)
+[![INTRO][intro]](https://github.com/lquyet/2dOsu)
+[![OPTION][option]](https://github.com/lquyet/2dOsu)
+[![INGAME][ingame]](https://github.com/lquyet/2dOsu)
+[![ENDGAME][end]](https://github.com/lquyet/2dOsu)
 
 This project was built as a Big Exercise for Advanced Programming (INT2215). It took me about 1 week to make from scratch (see the commits). The only graphic library I used is SDL2 (and some extensions).
 
@@ -92,7 +92,7 @@ These things are required:
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/Jo3yVX/2dOsu
+   git clone https://github.com/lquyet/2dOsu
    ```
 2. Open project in Visual Studio 2019, update VC++ Directories and Linker Input. Change Solution Platform to x64 then Build.
 
@@ -105,7 +105,7 @@ If you click on a white tile or run out of time, the game will stop immediately.
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/Jo3yVX/2dOsu/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/lquyet/2dOsu/issues) for a list of proposed features (and known issues).
 
 
 
@@ -134,7 +134,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Le Minh Quyet  - anhquyethgvx@gmail.com
 
-Project Link: [https://github.com/Jo3yVX/2dOsu](https://github.com/Jo3yVX/2dOsu)
+Project Link: [https://github.com/lquyet/2dOsu](https://github.com/lquyet/2dOsu)
 
 
 
@@ -151,16 +151,16 @@ Project Link: [https://github.com/Jo3yVX/2dOsu](https://github.com/Jo3yVX/2dOsu)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Jo3yVX/2dOsu.svg?style=for-the-badge
-[contributors-url]: https://github.com/Jo3yVX/2dOsu/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Jo3yVX/2dOsu.svg?style=for-the-badge
-[forks-url]: https://github.com/Jo3yVX/2dOsu/network/members
-[stars-shield]: https://img.shields.io/github/stars/Jo3yVX/2dOsu.svg?style=for-the-badge
-[stars-url]: https://github.com/Jo3yVX/2dOsu/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Jo3yVX/2dOsu.svg?style=for-the-badge
-[issues-url]: https://github.com/Jo3yVX/2dOsu/issues
-[license-url]: https://github.com/Jo3yVX/2dOsu/blob/main/LICENSE
-[license-shield]: https://img.shields.io/github/license/Jo3yVX/2dOsu.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/lquyet/2dOsu.svg?style=for-the-badge
+[contributors-url]: https://github.com/lquyet/2dOsu/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/lquyet/2dOsu.svg?style=for-the-badge
+[forks-url]: https://github.com/lquyet/2dOsu/network/members
+[stars-shield]: https://img.shields.io/github/stars/lquyet/2dOsu.svg?style=for-the-badge
+[stars-url]: https://github.com/lquyet/2dOsu/stargazers
+[issues-shield]: https://img.shields.io/github/issues/lquyet/2dOsu.svg?style=for-the-badge
+[issues-url]: https://github.com/lquyet/2dOsu/issues
+[license-url]: https://github.com/lquyet/2dOsu/blob/main/LICENSE
+[license-shield]: https://img.shields.io/github/license/lquyet/2dOsu.svg?style=for-the-badge
 [intro]: images/intro.png
 [option]: images/character.png
 [ingame]: images/ingame.png
